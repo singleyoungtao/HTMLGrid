@@ -1,0 +1,47 @@
+function Render() {}
+
+Render.render = function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY) {
+
+    var tableOuterHTML = '<div class="table-container"><table class="grid-table" border="1">';
+    tableOuterHTML += this._generateThead(data, rowHeights, colWidths);
+    tableOuterHTML += this._generateTbody(data, rowHeights);
+    tableOuterHTML += '</table></div>';
+    container.innerHTML = tableOuterHTML;
+    this._initCellBox(container, cellBoxY, cellBoxX);
+};
+
+Render.prototype = {
+
+    _generateThead: function (data, rowHeights, colWidths) {
+        var theadNum = data[0].length;
+        var i;
+        var theadHTMLString = '<thead class="grid-thead"><tr><th data-index="0-0" style="height: ' + rowHeights[0] +
+            'px; min-width: ' + colWidths[0] + 'px">&spades;</th>';
+        for (i = 0; i < theadNum; i++) {
+            theadHTMLString += '<th data-index="0-' + (i + 1) + '"  style="min-width: ' + colWidths[i + 1] + 'px;">' + i + '</th>';
+        }
+        theadHTMLString += '</tr></thead>';
+        return theadHTMLString;
+    },
+
+    _generateTbody: function (data, rowHeights) {
+        var trNum = data.length;
+        var tdNum = data[0].length;
+        var i, j;
+        var trHTMLString = "";
+        for (i = 0; i < trNum; i++) {
+            trHTMLString += '<tr><td data-index="' + (i + 1) + '-0" style="background-color: #aaaaaa; height:' + rowHeights[i + 1] + 'px;">' + i;
+            for (j = 0; j < tdNum; j++) {
+                trHTMLString += '<td data-index="' + (i + 1) + '-' + (j + 1) + '"><div><input value="' + data[i][j] + '"></div></td>';
+            }
+            trHTMLString += `</tr>`;
+        }
+        return trHTMLString;
+    },
+
+    _initCellBox: function (container, cellBoxY, cellBoxX) {
+        var table = container.querySelector('table');
+        var firstTableCell = table.rows[cellBoxY].cells[cellBoxX];
+        firstTableCell.style.border = '4px solid green';
+    },
+};

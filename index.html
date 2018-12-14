@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HtmlGrid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./main.css"/>
+</head>
+<body>
+<div class="htmlGrid" id="HtmlGrid"></div>
+<div class="control-panel">
+    <div>
+        <input id="DeleteRowIndex" type="text">
+        <button id="DeleteRow" onclick="deleteRow()">Delete Row</button>
+    </div>
+    <div>
+        <input id="DeleteColIndex" type="text">
+        <button id="DeleteCol" onclick="deleteCol()">Delete Col</button>
+    </div>
+    <div>
+        <input id="InsertRowIndex" type="text">
+        <button id="InsertRow" onclick="insertRow()">Insert Row</button>
+    </div>
+    <div>
+        <input id="InsertColIndex" type="text">
+        <button id="InsertCol" onclick="insertCol()">Insert Col</button>
+    </div>
+    <div>
+        IndexA <input id="SwapColInputA" type="text">
+        IndexB <input id="SwapColInputB" type="text">
+        <button id="SwapCol" onclick="swapCol()"> SwapCol</button>
+    </div>
+    <div>
+        IndexA <input id="SwapRowInputA" type="text">
+        IndexB <input id="SwapRowInputB" type="text">
+        <button id="SwapRow" onclick="swapRow()"> SwapRow</button>
+    </div>
+</div>
+</body>
+<script src="view.js"></script>
+<script src="model.js"></script>
+<script src="controller.js"></script>
+<script>
+    var data = [
+        [1, 2, 3, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [4, 5, 6, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [7, 8, 9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [7, 8, 9, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+    ];
+
+    // 将init改入constructor中
+    var container = document.getElementById('HtmlGrid');
+    var grid = new Grid(data, container);
+
+    // delete row
+    function deleteRow() {
+        var index = Number(document.getElementById('DeleteRowIndex').value);
+        grid.deleteRow(index);
+        document.getElementById('DeleteRowIndex').value = "";
+    }
+
+    // delete col
+    function deleteCol() {
+        var index = Number(document.getElementById('DeleteColIndex').value);
+        grid.deleteCol(index);
+        document.getElementById('DeleteColIndex').value = "";
+    }
+
+    // insert row
+    function insertRow() {
+        var index = Number(document.getElementById('InsertRowIndex').value);
+        grid.insertRow(index);
+        document.getElementById('InsertRowIndex').value = "";
+    }
+
+    // insert col
+    function insertCol() {
+        var index = Number(document.getElementById('InsertColIndex').value);
+        grid.insertCol(index);
+        document.getElementById('InsertColIndex').value = "";
+    }
+
+    // swap col
+    function swapCol() {
+        var indexA = document.getElementById('SwapColInputA').value;
+        var indexB = document.getElementById('SwapColInputB').value;
+        grid.swapPosition('col', Number(indexA), Number(indexB));
+        document.getElementById('SwapColInputA').value = "";
+        document.getElementById('SwapColInputB').value = "";
+    }
+
+    // swap row
+    function swapRow() {
+        var indexA = document.getElementById('SwapRowInputA').value;
+        var indexB = document.getElementById('SwapRowInputB').value;
+        grid.swapPosition('row', Number(indexA), Number(indexB));
+        document.getElementById('SwapRowInputA').value = "";
+        document.getElementById('SwapRowInputB').value = "";
+    }
+</script>
+</html>
