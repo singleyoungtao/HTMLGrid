@@ -338,26 +338,31 @@ Grid.prototype = {
     },
 
     insertRow: function (index) {
+        if (!ToolsUtil.isNumber(index)) { return; }
         this.model.insertRow(index);
         this.render();
     },
 
     insertCol: function (index) {
+        if (!ToolsUtil.isNumber(index)) { return; }
         this.model.insertCol(index);
         this.render();
     },
 
     deleteRow: function (index) {
+        if (!ToolsUtil.isNumber(index)) { return; }
         this.model.deleteRow(index);
         this.render();
     },
 
     deleteCol: function (index) {
+        if (!ToolsUtil.isNumber(index)) { return; }
         this.model.deleteCol(index);
         this.render();
     },
 
     swapPosition: function (type, indexA, indexB) {
+        if (!ToolsUtil.isNumber(indexA) && !ToolsUtil.isNumber(indexB)) { return; }
         this.model.swapPosition(type, indexA, indexB);
         this.render();
     },
