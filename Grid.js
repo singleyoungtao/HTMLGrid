@@ -3,8 +3,6 @@ function Grid(data, dom) {
     this.resizable = false;
     this.isResizing = false;
     this.isSwapping = false;
-    // this.mouseX = 0;
-    // this.mouseY = 0;
     this.moveEle = null;
     this.currentMoveEleStartIndexX = null;
     this.currentMoveEleStartIndexY = null;
@@ -180,6 +178,7 @@ Grid.prototype = {
                 }
             }
             this.isSwapping = false;
+            this.render();
         };
 
         var _swapPositionMouseMove = function (e) {
@@ -188,46 +187,43 @@ Grid.prototype = {
                 var currentProcessEleIndex;
                 var preSwapEleIndex;
                 var k;
+                try {
+                    preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
+                    currentProcessEleIndex = ToolsUtil.getCellIndex(e.target);
+                } catch (e) {
+                    this.isSwapping = false;
+                    return;
+                }
                 if (this.swapType === 'col') {
                     if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
-                        try {
-                            currentProcessEleIndex = ToolsUtil.getCellIndex(e.target)[1];
-                        } catch (e) {
+                        if (currentProcessEleIndex[0] !== 0) {
+                            this.isSwapping = false;
+                            this.render();
                             return;
                         }
                         for (k = 1; k < this.table.rows.length; k++) {
-                            this.table.rows[k].cells[currentProcessEleIndex].style.backgroundColor = "blue";
+                            this.table.rows[k].cells[currentProcessEleIndex[1]].style.backgroundColor = "blue";
                         }
                         if (this.preSwapEle !== this.startSwapEle) {
-                            try {
-                                preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle)[1];
-                            } catch (e) {
-                                return;
-                            }
                             for (k = 1; k < this.table.rows.length; k++) {
-                                this.table.rows[k].cells[preSwapEleIndex].style.backgroundColor = "white";
+                                this.table.rows[k].cells[preSwapEleIndex[1]].style.backgroundColor = "white";
                             }
                         }
                         this.preSwapEle = e.target;
                     }
                 } else if (this.swapType === 'row') {
                     if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
-                        try {
-                            currentProcessEleIndex = ToolsUtil.getCellIndex(e.target)[0];
-                        } catch (e) {
+                        if (currentProcessEleIndex[1] !== 0) {
+                            this.isSwapping = false;
+                            this.render();
                             return;
                         }
                         for (k = 1; k < this.table.rows[0].cells.length; k++) {
-                            this.table.rows[currentProcessEleIndex].cells[k].style.backgroundColor = "blue";
+                            this.table.rows[currentProcessEleIndex[0]].cells[k].style.backgroundColor = "blue";
                         }
                         if (this.preSwapEle !== this.startSwapEle) {
-                            try {
-                                preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle)[0];
-                            } catch (e) {
-                                return;
-                            }
                             for (k = 1; k < this.table.rows[0].cells.length; k++) {
-                                this.table.rows[preSwapEleIndex].cells[k].style.backgroundColor = "white";
+                                this.table.rows[preSwapEleIndex[0]].cells[k].style.backgroundColor = "white";
                             }
                         }
                         this.preSwapEle = e.target;
