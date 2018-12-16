@@ -7,8 +7,6 @@ function Model(data) {
     this.cellPadding = '10';
     this.cellBoxX = 1;
     this.cellBoxY = 1;
-    this.preCellBoxX = 1;
-    this.preCellBoxY = 1;
 
     this.colWidths = ToolsUtil.initEmptyArr(this.data[0].length +1).map(function () {
         return 80;
@@ -107,5 +105,24 @@ Model.prototype = {
     
     updateCellData: function (indexX, indexY, value) {
         this.data[indexY][indexX] = value;
+    },
+
+    updateFocusedCellCoordinates: function (type) {
+        switch (type) {
+            case 'left':
+                this.cellBoxX -= 1;
+                break;
+            case 'up':
+                this.cellBoxY -= 1;
+                break;
+            case 'right':
+                this.cellBoxX += 1;
+                break;
+            case 'down':
+                this.cellBoxY += 1;
+                break;
+            default:
+                break;
+        }
     }
 };

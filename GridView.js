@@ -46,4 +46,13 @@ var Render = {
         var firstTableCell = table.rows[cellBoxY].cells[cellBoxX];
         firstTableCell.style.border = '4px solid green';
     },
+
+    moveFocusedCellBox: function (wrapper, cellIndexX, cellIndexY, precellX, precellY) {
+        var table = wrapper.querySelector('table');
+        var focusedTableCell = table.rows[cellIndexY].cells[cellIndexX];
+        focusedTableCell.style.border = '4px solid green';
+        focusedTableCell.querySelector('input').focus();
+        var preFocusedTableCell = table.rows[precellY].cells[precellX];
+        preFocusedTableCell.removeAttribute('style');
+    }
 };

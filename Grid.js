@@ -11,6 +11,8 @@ function Grid(data, dom) {
     this.swapType = '';
     this.preSwapEle = null;
     this.startSwapEle = null;
+    this.preCellBoxX = 1;
+    this.preCellBoxY = 1;
 
     this.init(data, dom);
 }
@@ -234,6 +236,48 @@ Grid.prototype = {
             }
         };
 
+        var _moveCellFocus = function (e) {
+            switch (e.keyCode) {
+                case 37:
+                    // left
+                    if (this.model.cellBoxX - 1 > 0) {
+                        this.model.updateFocusedCellCoordinates('left');
+                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
+                        this.preCellBoxX = this.model.cellBoxX;
+                    }
+                    break;
+                case 38:
+                    // up
+                    if (this.model.cellBoxY - 1 > 0) {
+                        this.model.updateFocusedCellCoordinates('up');
+                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
+                        this.preCellBoxY = this.model.cellBoxY;
+                    }
+                    break;
+                case 9:
+                case 39:
+                    // right
+                    if (this.model.cellBoxX + 1 < this.model.data[0].length) {
+                        e.preventDefault();
+                        this.model.updateFocusedCellCoordinates('right');
+                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
+                        this.preCellBoxX = this.model.cellBoxX;
+                    }
+                    break;
+                case 40:
+                    // down
+                    if (this.model.cellBoxY + 1 < this.model.data.length) {
+                        this.model.updateFocusedCellCoordinates('down');
+                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
+                        this.preCellBoxY = this.model.cellBoxY;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        };
+
+
 
         this.changeCursor = _changeCursor.bind(this);
         this.resizeMouseDown = _resizeMouseDown.bind(this);
@@ -243,6 +287,7 @@ Grid.prototype = {
         this.swapPositionMouseDown = _swapPositionMouseDown.bind(this);
         this.swapPositionMouseUp = _swapPositionMouseUp.bind(this);
         this.swapPositionMouseMove = _swapPositionMouseMove.bind(this);
+        this.moveCellFocus = _moveCellFocus.bind(this);
     },
 
     bindTableEvents: function () {
@@ -255,6 +300,7 @@ Grid.prototype = {
         this.wrapper.addEventListener('mousedown', this.swapPositionMouseDown);
         document.addEventListener('mouseup', this.swapPositionMouseUp);
         this.wrapper.addEventListener('mousemove', this.swapPositionMouseMove);
+        this.wrapper.addEventListener('keydown', this.moveCellFocus);
     },
 
     removeTableEvents: function () {
@@ -266,6 +312,7 @@ Grid.prototype = {
         this.wrapper.removeEventListener('mousedown', this.swapPositionMouseDown);
         document.removeEventListener('mouseup', this.swapPositionMouseUp);
         this.wrapper.removeEventListener('mousemove', this.swapPositionMouseMove);
+        this.wrapper.removeEventListener('keydown', this.moveCellFocus);
     },
 
     insertRow: function (index) {
