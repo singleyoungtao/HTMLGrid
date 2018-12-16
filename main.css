@@ -4,6 +4,11 @@
     max-height: 800px;
     border-radius: 3px;
     border-right: 1px solid black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .table-container:focus {

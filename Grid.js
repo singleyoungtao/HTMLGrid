@@ -176,9 +176,9 @@ Grid.prototype = {
                     }
                     this.swapPosition('row', this.currentMoveEleStartIndexY, this.currentMoveEleEndIndexY);
                 }
+                this.render();
             }
             this.isSwapping = false;
-            this.render();
         };
 
         var _swapPositionMouseMove = function (e) {
@@ -290,6 +290,12 @@ Grid.prototype = {
             }
         };
 
+        var _swapPositionMouseLeave = function () {
+            this.isSwapping = false;
+            this.isResizing = false;
+            this.render();
+        };
+
         this.changeCursor = _changeCursor.bind(this);
         this.resizeMouseDown = _resizeMouseDown.bind(this);
         this.resizeMouseUp = _resizeMouseUp.bind(this);
@@ -300,6 +306,7 @@ Grid.prototype = {
         this.swapPositionMouseMove = _swapPositionMouseMove.bind(this);
         this.moveCellFocus = _moveCellFocus.bind(this);
         this.focuseCell = _focuseCell.bind(this);
+        this.swapPositionMouseLeave = _swapPositionMouseLeave.bind(this);
     },
 
     bindTableEvents: function () {
@@ -314,6 +321,7 @@ Grid.prototype = {
         this.wrapper.addEventListener('mousemove', this.swapPositionMouseMove);
         this.wrapper.addEventListener('keydown', this.moveCellFocus);
         this.wrapper.addEventListener('click', this.focuseCell);
+        this.wrapper.addEventListener('mouseleave', this.swapPositionMouseLeave);
     },
 
     removeTableEvents: function () {
@@ -326,6 +334,7 @@ Grid.prototype = {
         document.removeEventListener('mouseup', this.swapPositionMouseUp);
         this.wrapper.removeEventListener('mousemove', this.swapPositionMouseMove);
         this.wrapper.removeEventListener('keydown', this.moveCellFocus);
+        this.wrapper.removeEventListener('click', this.focuseCell);
     },
 
     insertRow: function (index) {
