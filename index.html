@@ -46,6 +46,9 @@
     <div style="margin-left: 45px">
         <button id="MoveDown" onclick="moveCell('down')">Move Down</button>
     </div>
+    <div>
+        <button id="Destory" onclick="destory()">Destory</button>
+    </div>
 </div>
 </body>
 <script src="ToolsUtil.js"></script>
@@ -123,6 +126,10 @@
 
     function moveCell(type) {
         grid.moveCell(type);
+    }
+    
+    function destory() {
+        ToolsUtil.deleteInstance(grid, container)
     }
 </script>
 </html>

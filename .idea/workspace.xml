@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ed8cd8ba-b2e7-460c-9802-6a15cba7b579" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Grid.js" beforeDir="false" afterPath="$PROJECT_DIR$/Grid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GridModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/GridModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GridView.js" beforeDir="false" afterPath="$PROJECT_DIR$/GridView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToolsUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/ToolsUtil.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -26,16 +27,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="59" />
-          <entry key="html" value="283" />
-          <entry key="js" value="2829" />
+          <entry key="html" value="352" />
+          <entry key="js" value="3009" />
           <entry key="md" value="116" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="59" />
-          <entry key="HTML" value="283" />
-          <entry key="JavaScript" value="2829" />
+          <entry key="HTML" value="352" />
+          <entry key="JavaScript" value="3009" />
           <entry key="Markdown" value="116" />
         </counts>
       </usages-collector>
@@ -58,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="48" column="6" lean-forward="true" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+            <state relative-caret-position="600">
+              <caret line="131" column="24" lean-forward="true" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
               <folding>
                 <element signature="n#style#0;n#div#6;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#8;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -80,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Grid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="360" column="25" lean-forward="true" selection-start-line="360" selection-start-column="25" selection-end-line="360" selection-end-column="25" />
+            <state relative-caret-position="148">
+              <caret line="196" column="46" lean-forward="true" selection-start-line="196" selection-start-column="46" selection-end-line="196" selection-end-column="46" />
               <folding>
                 <element signature="n#!!block;n#Grid#0" />
                 <element signature="e#475#740#0" />
@@ -114,32 +115,33 @@
                 <element signature="e#4366#4764#0" />
                 <element signature="e#4418#4704#0" />
                 <element signature="e#4715#4754#0" />
-                <element signature="e#4817#6559#0" />
                 <element signature="e#4909#4985#0" />
                 <element signature="e#4996#5035#0" />
-                <element signature="e#5158#5824#0" />
-                <element signature="e#5301#5810#0" />
-                <element signature="e#5482#5623#0" />
-                <element signature="e#5874#6549#0" />
-                <element signature="e#6017#6535#0" />
-                <element signature="e#6207#6348#0" />
-                <element signature="e#7542#9988#0" />
-                <element signature="e#7577#9978#0" />
+                <element signature="e#6209#6352#0" />
+                <element signature="e#6610#7489#0" />
+                <element signature="e#6645#7415#0" />
+                <element signature="e#6692#7029#0" />
+                <element signature="e#6718#6837#0" />
+                <element signature="e#6848#6903#0" />
+                <element signature="e#7064#7401#0" />
+                <element signature="e#7090#7209#0" />
+                <element signature="e#7220#7275#0" />
                 <element signature="e#7739#7916#0" />
                 <element signature="e#7927#8019#0" />
-                <element signature="e#8065#8988#0" />
-                <element signature="e#8155#8970#0" />
                 <element signature="e#8218#8377#0" />
-                <element signature="e#8447#8586#0" />
-                <element signature="e#8654#8896#0" />
-                <element signature="e#8729#8870#0" />
-                <element signature="e#9023#9964#0" />
-                <element signature="e#9113#9946#0" />
-                <element signature="e#9176#9335#0" />
                 <element signature="e#9414#9553#0" />
+                <element signature="e#9113#9946#0" />
+                <element signature="e#9023#9964#0" />
                 <element signature="e#9621#9872#0" />
                 <element signature="e#9705#9846#0" />
+                <element signature="e#10037#12014#0" />
+                <element signature="e#10051#12004#0" />
+                <element signature="e#10084#10504#0" />
+                <element signature="e#10174#10477#0" />
+                <element signature="e#10521#10937#0" />
                 <element signature="e#10609#10910#0" />
+                <element signature="e#10982#11480#0" />
+                <element signature="e#11097#11453#0" />
                 <element signature="e#11485#11926#0" />
                 <element signature="e#11596#11899#0" />
                 <element signature="e#11943#11978#0" />
@@ -147,12 +149,20 @@
                 <element signature="e#12088#12192#0" />
                 <element signature="e#12203#12242#0" />
                 <element signature="e#12296#12660#0" />
+                <element signature="e#12727#12775#0" />
                 <element signature="e#13328#14086#0" />
                 <element signature="e#14124#14819#0" />
                 <element signature="e#679#860#0" />
                 <element signature="e#895#1076#0" />
                 <element signature="e#1111#1292#0" />
                 <element signature="e#1327#1508#0" />
+                <element signature="e#1561#1760#0" />
+                <element signature="e#15787#15803#0" />
+                <element signature="e#15816#15850#0" />
+                <element signature="e#15844#15911#0" />
+                <element signature="e#15924#15991#0" />
+                <element signature="e#16002#16070#0" />
+                <element signature="e#16083#16150#0" />
               </folding>
             </state>
           </provider>
@@ -167,11 +177,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GridModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
-              <caret line="95" column="17" lean-forward="true" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+            <state relative-caret-position="186">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
               <folding>
                 <element signature="e#304#330#0" />
                 <element signature="e#446#472#0" />
@@ -183,6 +193,14 @@
                 <element signature="e#1447#1597#0" />
                 <element signature="e#1632#1862#0" />
                 <element signature="e#1696#1750#0" />
+                <element signature="e#1915#2885#0" />
+                <element signature="e#1947#2879#0" />
+                <element signature="e#1975#2392#0" />
+                <element signature="e#2033#2078#0" />
+                <element signature="e#2134#2316#0" />
+                <element signature="e#2405#2825#0" />
+                <element signature="e#2463#2508#0" />
+                <element signature="e#2567#2749#0" />
                 <element signature="e#2838#2869#0" />
                 <element signature="e#2737#2753#0" />
                 <element signature="e#2756#2790#0" />
@@ -190,6 +208,7 @@
                 <element signature="e#2880#2965#0" />
                 <element signature="e#2978#3009#0" />
                 <element signature="e#3064#3080#0" />
+                <element signature="e#3184#3200#0" />
                 <element signature="e#3198#3232#0" />
                 <element signature="e#3226#3297#0" />
                 <element signature="e#3310#3379#0" />
@@ -204,8 +223,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ToolsUtil.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="11">
+              <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -213,8 +232,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GridView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="49" column="87" lean-forward="true" selection-start-line="49" selection-start-column="87" selection-end-line="49" selection-end-column="87" />
+            <state relative-caret-position="344">
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
               <folding>
                 <element signature="e#129#497#0" />
                 <element signature="e#472#496#0" />
@@ -224,7 +243,6 @@
                 <element signature="e#1116#1692#0" />
                 <element signature="e#1272#1657#0" />
                 <element signature="e#1460#1610#0" />
-                <element signature="e#1754#1939#0" />
               </folding>
             </state>
           </provider>
@@ -239,10 +257,14 @@
       <find>moveEle</find>
       <find>preSwapEle</find>
       <find>up</find>
+      <find>green</find>
+      <find>#009a61</find>
+      <find>blue</find>
     </findStrings>
     <replaceStrings>
       <replace>model</replace>
       <replace>thirender()</replace>
+      <replace>#009a61</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -251,13 +273,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ToolsUtil.js" />
         <option value="$PROJECT_DIR$/TODO.md" />
-        <option value="$PROJECT_DIR$/GridView.js" />
         <option value="$PROJECT_DIR$/main.css" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/Grid.js" />
         <option value="$PROJECT_DIR$/GridModel.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/ToolsUtil.js" />
+        <option value="$PROJECT_DIR$/GridView.js" />
+        <option value="$PROJECT_DIR$/Grid.js" />
       </list>
     </option>
   </component>
@@ -329,7 +351,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27806000" />
+    <option name="totallyTimeSpent" value="29586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="23" width="1920" height="1057" extended-state="6" />
@@ -379,13 +401,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ToolsUtil.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TODO.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -393,24 +408,6 @@
             <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GridView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="49" column="87" lean-forward="true" selection-start-line="49" selection-start-column="87" selection-end-line="49" selection-end-column="87" />
-          <folding>
-            <element signature="e#129#497#0" />
-            <element signature="e#472#496#0" />
-            <element signature="e#539#563#0" />
-            <element signature="e#560#1065#0" />
-            <element signature="e#840#983#0" />
-            <element signature="e#1116#1692#0" />
-            <element signature="e#1272#1657#0" />
-            <element signature="e#1460#1610#0" />
-            <element signature="e#1754#1939#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -423,8 +420,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="48" column="6" lean-forward="true" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+        <state relative-caret-position="600">
+          <caret line="131" column="24" lean-forward="true" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
           <folding>
             <element signature="n#style#0;n#div#6;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#8;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -432,10 +429,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ToolsUtil.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GridView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="e#129#497#0" />
+            <element signature="e#472#496#0" />
+            <element signature="e#539#563#0" />
+            <element signature="e#560#1065#0" />
+            <element signature="e#840#983#0" />
+            <element signature="e#1116#1692#0" />
+            <element signature="e#1272#1657#0" />
+            <element signature="e#1460#1610#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GridModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <folding>
+            <element signature="e#304#330#0" />
+            <element signature="e#446#472#0" />
+            <element signature="e#525#884#0" />
+            <element signature="e#542#877#0" />
+            <element signature="e#919#1102#0" />
+            <element signature="e#1147#1486#0" />
+            <element signature="e#1295#1359#0" />
+            <element signature="e#1447#1597#0" />
+            <element signature="e#1632#1862#0" />
+            <element signature="e#1696#1750#0" />
+            <element signature="e#1915#2885#0" />
+            <element signature="e#1947#2879#0" />
+            <element signature="e#1975#2392#0" />
+            <element signature="e#2033#2078#0" />
+            <element signature="e#2134#2316#0" />
+            <element signature="e#2405#2825#0" />
+            <element signature="e#2463#2508#0" />
+            <element signature="e#2567#2749#0" />
+            <element signature="e#2838#2869#0" />
+            <element signature="e#2737#2753#0" />
+            <element signature="e#2756#2790#0" />
+            <element signature="e#2784#2867#0" />
+            <element signature="e#2880#2965#0" />
+            <element signature="e#2978#3009#0" />
+            <element signature="e#3064#3080#0" />
+            <element signature="e#3184#3200#0" />
+            <element signature="e#3198#3232#0" />
+            <element signature="e#3226#3297#0" />
+            <element signature="e#3310#3379#0" />
+            <element signature="e#3392#3464#0" />
+            <element signature="e#3477#3548#0" />
+            <element signature="e#3561#3592#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Grid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="360" column="25" lean-forward="true" selection-start-line="360" selection-start-column="25" selection-end-line="360" selection-end-column="25" />
+        <state relative-caret-position="148">
+          <caret line="196" column="46" lean-forward="true" selection-start-line="196" selection-start-column="46" selection-end-line="196" selection-end-column="46" />
           <folding>
             <element signature="n#!!block;n#Grid#0" />
             <element signature="e#475#740#0" />
@@ -465,32 +527,33 @@
             <element signature="e#4366#4764#0" />
             <element signature="e#4418#4704#0" />
             <element signature="e#4715#4754#0" />
-            <element signature="e#4817#6559#0" />
             <element signature="e#4909#4985#0" />
             <element signature="e#4996#5035#0" />
-            <element signature="e#5158#5824#0" />
-            <element signature="e#5301#5810#0" />
-            <element signature="e#5482#5623#0" />
-            <element signature="e#5874#6549#0" />
-            <element signature="e#6017#6535#0" />
-            <element signature="e#6207#6348#0" />
-            <element signature="e#7542#9988#0" />
-            <element signature="e#7577#9978#0" />
+            <element signature="e#6209#6352#0" />
+            <element signature="e#6610#7489#0" />
+            <element signature="e#6645#7415#0" />
+            <element signature="e#6692#7029#0" />
+            <element signature="e#6718#6837#0" />
+            <element signature="e#6848#6903#0" />
+            <element signature="e#7064#7401#0" />
+            <element signature="e#7090#7209#0" />
+            <element signature="e#7220#7275#0" />
             <element signature="e#7739#7916#0" />
             <element signature="e#7927#8019#0" />
-            <element signature="e#8065#8988#0" />
-            <element signature="e#8155#8970#0" />
             <element signature="e#8218#8377#0" />
-            <element signature="e#8447#8586#0" />
-            <element signature="e#8654#8896#0" />
-            <element signature="e#8729#8870#0" />
-            <element signature="e#9023#9964#0" />
-            <element signature="e#9113#9946#0" />
-            <element signature="e#9176#9335#0" />
             <element signature="e#9414#9553#0" />
+            <element signature="e#9113#9946#0" />
+            <element signature="e#9023#9964#0" />
             <element signature="e#9621#9872#0" />
             <element signature="e#9705#9846#0" />
+            <element signature="e#10037#12014#0" />
+            <element signature="e#10051#12004#0" />
+            <element signature="e#10084#10504#0" />
+            <element signature="e#10174#10477#0" />
+            <element signature="e#10521#10937#0" />
             <element signature="e#10609#10910#0" />
+            <element signature="e#10982#11480#0" />
+            <element signature="e#11097#11453#0" />
             <element signature="e#11485#11926#0" />
             <element signature="e#11596#11899#0" />
             <element signature="e#11943#11978#0" />
@@ -498,44 +561,20 @@
             <element signature="e#12088#12192#0" />
             <element signature="e#12203#12242#0" />
             <element signature="e#12296#12660#0" />
+            <element signature="e#12727#12775#0" />
             <element signature="e#13328#14086#0" />
             <element signature="e#14124#14819#0" />
             <element signature="e#679#860#0" />
             <element signature="e#895#1076#0" />
             <element signature="e#1111#1292#0" />
             <element signature="e#1327#1508#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GridModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="95" column="17" lean-forward="true" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
-          <folding>
-            <element signature="e#304#330#0" />
-            <element signature="e#446#472#0" />
-            <element signature="e#525#884#0" />
-            <element signature="e#542#877#0" />
-            <element signature="e#919#1102#0" />
-            <element signature="e#1147#1486#0" />
-            <element signature="e#1295#1359#0" />
-            <element signature="e#1447#1597#0" />
-            <element signature="e#1632#1862#0" />
-            <element signature="e#1696#1750#0" />
-            <element signature="e#2838#2869#0" />
-            <element signature="e#2737#2753#0" />
-            <element signature="e#2756#2790#0" />
-            <element signature="e#2784#2867#0" />
-            <element signature="e#2880#2965#0" />
-            <element signature="e#2978#3009#0" />
-            <element signature="e#3064#3080#0" />
-            <element signature="e#3198#3232#0" />
-            <element signature="e#3226#3297#0" />
-            <element signature="e#3310#3379#0" />
-            <element signature="e#3392#3464#0" />
-            <element signature="e#3477#3548#0" />
-            <element signature="e#3561#3592#0" />
+            <element signature="e#1561#1760#0" />
+            <element signature="e#15787#15803#0" />
+            <element signature="e#15816#15850#0" />
+            <element signature="e#15844#15911#0" />
+            <element signature="e#15924#15991#0" />
+            <element signature="e#16002#16070#0" />
+            <element signature="e#16083#16150#0" />
           </folding>
         </state>
       </provider>

@@ -10,5 +10,14 @@ var ToolsUtil = {
 
     getCellIndex: function (element) {
         return element.getAttribute('data-index').split('-').map(Number);
+    },
+    
+    deleteInstance: function (instance, container) {
+        instance.removeTableEvents();
+        Render.removeDOM(container);
+        var instanceKeys = Object.keys(instance);
+        instanceKeys.forEach(function (item) {
+            delete instance[item];
+        });
     }
 };

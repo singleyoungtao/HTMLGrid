@@ -44,15 +44,19 @@ var Render = {
     _initCellBox: function (container, cellBoxY, cellBoxX) {
         var table = container.querySelector('table');
         var firstTableCell = table.rows[cellBoxY].cells[cellBoxX];
-        firstTableCell.style.border = '4px solid green';
+        firstTableCell.style.border = '4px solid #009a61';
     },
 
     moveFocusedCellBox: function (wrapper, cellIndexX, cellIndexY, precellX, precellY) {
         var table = wrapper.querySelector('table');
         var focusedTableCell = table.rows[cellIndexY].cells[cellIndexX];
-        focusedTableCell.style.border = '4px solid green';
+        focusedTableCell.style.border = '4px solid #009a61';
         focusedTableCell.querySelector('input').focus();
         var preFocusedTableCell = table.rows[precellY].cells[precellX];
         preFocusedTableCell.removeAttribute('style');
+    },
+    
+    removeDOM: function (container) {
+        container.innerHTML = '';
     }
 };
