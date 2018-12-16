@@ -8,7 +8,7 @@ function Model(data) {
     this.preCellBoxX = 1;
     this.preCellBoxY = 1;
 
-    this.colWidths = initEmptyArr(this.data[0].length +1).map(function () {
+    this.colWidths = ToolsUtil.initEmptyArr(this.data[0].length +1).map(function () {
         return 80;
     });
 

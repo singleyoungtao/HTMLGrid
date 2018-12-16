@@ -1,16 +1,13 @@
-function Render() {}
+var Render = {
+    render: function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY) {
 
-Render.render = function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY) {
-
-    var tableOuterHTML = '<div class="table-container"><table class="grid-table" border="1">';
-    tableOuterHTML += this._generateThead(data, rowHeights, colWidths);
-    tableOuterHTML += this._generateTbody(data, rowHeights);
-    tableOuterHTML += '</table></div>';
-    container.innerHTML = tableOuterHTML;
-    this._initCellBox(container, cellBoxY, cellBoxX);
-};
-
-Render.prototype = {
+        var tableOuterHTML = '<div class="table-container"><table class="grid-table" border="1">';
+        tableOuterHTML += this._generateThead(data, rowHeights, colWidths);
+        tableOuterHTML += this._generateTbody(data, rowHeights);
+        tableOuterHTML += '</table></div>';
+        container.innerHTML = tableOuterHTML;
+        this._initCellBox(container, cellBoxY, cellBoxX);
+    },
 
     _generateThead: function (data, rowHeights, colWidths) {
         var theadNum = data[0].length;
