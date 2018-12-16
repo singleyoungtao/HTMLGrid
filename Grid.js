@@ -277,7 +277,22 @@ Grid.prototype = {
             }
         };
 
+        var _focuseCell = function (e) {
+            var eleIndex;
+            try {
+                eleIndex = ToolsUtil.getCellIndex(e.target.parentElement.parentElement);
+            } catch (e) {
+                return;
+            }
 
+            if (eleIndex[0] > 0 && eleIndex[1] > 0) {
+                this.model.cellBoxX = eleIndex[1];
+                this.model.cellBoxY = eleIndex[0];
+                Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
+                this.preCellBoxX = this.model.cellBoxX;
+                this.preCellBoxY = this.model.cellBoxY;
+            }
+        };
 
         this.changeCursor = _changeCursor.bind(this);
         this.resizeMouseDown = _resizeMouseDown.bind(this);
@@ -288,6 +303,7 @@ Grid.prototype = {
         this.swapPositionMouseUp = _swapPositionMouseUp.bind(this);
         this.swapPositionMouseMove = _swapPositionMouseMove.bind(this);
         this.moveCellFocus = _moveCellFocus.bind(this);
+        this.focuseCell = _focuseCell.bind(this);
     },
 
     bindTableEvents: function () {
@@ -301,6 +317,7 @@ Grid.prototype = {
         document.addEventListener('mouseup', this.swapPositionMouseUp);
         this.wrapper.addEventListener('mousemove', this.swapPositionMouseMove);
         this.wrapper.addEventListener('keydown', this.moveCellFocus);
+        this.wrapper.addEventListener('click', this.focuseCell);
     },
 
     removeTableEvents: function () {
