@@ -29,12 +29,22 @@
     <div>
         IndexA <input id="SwapColInputA" type="text">
         IndexB <input id="SwapColInputB" type="text">
-        <button id="SwapCol" onclick="swapCol()"> SwapCol</button>
+        <button id="SwapCol" onclick="swapCol()">SwapCol</button>
     </div>
     <div>
         IndexA <input id="SwapRowInputA" type="text">
         IndexB <input id="SwapRowInputB" type="text">
-        <button id="SwapRow" onclick="swapRow()"> SwapRow</button>
+        <button id="SwapRow" onclick="swapRow()">SwapRow</button>
+    </div>
+    <div style="margin-left: 45px;">
+        <button id="MoveUp" onclick="moveCell('up')">Move Up</button>
+    </div>
+    <div>
+        <button id="MoveLeft" onclick="moveCell('left')">Move Left</button>
+        <button id="MoveRight" onclick="moveCell('right')">Move Right</button>
+    </div>
+    <div style="margin-left: 45px">
+        <button id="MoveDown" onclick="moveCell('down')">Move Down</button>
     </div>
 </div>
 </body>
@@ -109,6 +119,10 @@
         grid.swapPosition('row', Number(indexA), Number(indexB));
         document.getElementById('SwapRowInputA').value = "";
         document.getElementById('SwapRowInputB').value = "";
+    }
+
+    function moveCell(type) {
+        grid.moveCell(type);
     }
 </script>
 </html>

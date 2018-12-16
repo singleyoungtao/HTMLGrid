@@ -254,7 +254,7 @@ Grid.prototype = {
                 case 39:
                     // right
                     if (this.model.cellBoxX + 1 < this.model.data[0].length) {
-                        e.preventDefault();
+                        if (e.preventDefault) { e.preventDefault(); }
                         this.model.updateFocusedCellCoordinates('right');
                         Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
                         this.preCellBoxX = this.model.cellBoxX;
@@ -361,4 +361,23 @@ Grid.prototype = {
         this.model.swapPosition(type, indexA, indexB);
         this.render();
     },
+
+    moveCell: function (type) {
+        var e = {};
+        switch (type) {
+            case 'left':
+                e.keyCode = 37;
+                break;
+            case 'up':
+                e.keyCode = 38;
+                break;
+            case 'right':
+                e.keyCode = 39;
+                break;
+            case 'down':
+                e.keyCode = 40;
+                break;
+        }
+        this.moveCellFocus(e);
+    }
 };

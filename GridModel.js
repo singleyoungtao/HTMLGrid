@@ -69,6 +69,11 @@ Model.prototype = {
                 if (indexA < 0 || indexB < 0) {
                     break
                 }
+
+                temp = this.colWidths[indexA + 1];
+                this.colWidths[indexA + 1] = this.colWidths[indexB + 1];
+                this.colWidths[indexB + 1] = temp;
+
                 for (i = 0; i < this.data.length; i++) {
                     temp = this.data[i][indexA];
                     this.data[i][indexA] = this.data[i][indexB];
@@ -79,6 +84,11 @@ Model.prototype = {
                 if (indexA < 0 || indexB < 0) {
                     break
                 }
+
+                temp = this.rowHeights[indexA + 1];
+                this.rowHeights[indexA + 1] = this.rowHeights[indexB + 1];
+                this.rowHeights[indexB + 1] = temp;
+
                 for (i = 0; i < this.data[0].length; i++) {
                     temp = this.data[indexA][i];
                     this.data[indexA][i] = this.data[indexB][i];
