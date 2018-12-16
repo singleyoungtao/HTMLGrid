@@ -40,5 +40,53 @@ Model.prototype = {
         this.rowHeights.splice(index + 1, 0, this.defaultHeight);
     },
 
+    insertCol: function (index) {
+        var newCol = ToolsUtil.initEmptyArr(this.data.length);
+        var i;
+        for (i = 0; i < this.data.length; i++) {
+            this.data[i].splice(index, 0, newCol[i])
+        }
+        this.colWidths.splice(index + 1, 0, this.defaultWidth);
+    },
 
+    deleteRow: function (index) {
+        this.data.splice(index, 1);
+        this.rowHeights.splice(index + 1, 1);
+    },
+
+    deleteCol: function (index) {
+        let i;
+        for (i = 0; i < this.data.length; i++) {
+            this.data[i].splice(index, 1);
+        }
+        this.colWidths.splice(index + 1, 1);
+    },
+
+    swapPosition: function (type, indexA, indexB) {
+        let i, temp;
+        switch (type) {
+            case 'col':
+                if (indexA < 0 || indexB < 0) {
+                    break
+                }
+                for (i = 0; i < this.data.length; i++) {
+                    temp = this.data[i][indexA];
+                    this.data[i][indexA] = this.data[i][indexB];
+                    this.data[i][indexB] = temp;
+                }
+                break;
+            case 'row':
+                if (indexA < 0 || indexB < 0) {
+                    break
+                }
+                for (i = 0; i < this.data[0].length; i++) {
+                    temp = this.data[indexA][i];
+                    this.data[indexA][i] = this.data[indexB][i];
+                    this.data[indexB][i] = temp;
+                }
+                break;
+            default:
+                break;
+        }
+    },
 };
