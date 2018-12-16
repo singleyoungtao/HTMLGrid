@@ -91,4 +91,21 @@ Model.prototype = {
                 break;
         }
     },
+
+    resize: function (type, index, width) {
+        switch (type) {
+            case 'width':
+                this.colWidths[index] = width;
+                break;
+            case 'height':
+                this.rowHeights[index] = width;
+                break;
+            default:
+                break;
+        }
+    },
+    
+    updateCellData: function (indexX, indexY, value) {
+        this.data[indexY][indexX] = value;
+    }
 };

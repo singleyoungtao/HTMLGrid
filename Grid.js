@@ -3,8 +3,8 @@ function Grid(data, dom) {
     this.resizable = false;
     this.isResizing = false;
     this.isSwapping = false;
-    this.mouseX = 0;
-    this.mouseY = 0;
+    // this.mouseX = 0;
+    // this.mouseY = 0;
 
     this.init(data, dom);
 }
@@ -70,26 +70,19 @@ Grid.prototype = {
 
         var _resizeMouseUp = function () {
             if (this.isResizing) {
-                // this.isResizing = false;
                 if (this.wrapper.style.cursor === "col-resize") {
                     var width = parseInt(this.moveEle.style.minWidth, 10) >= this.model.minWidth
                         ? parseInt(this.moveEle.style.minWidth, 10)
                         : this.model.minWidth;
-                    // if (parseInt(this.moveEle.style.minWidth, 10) >= this.model.minWidth) {
-                    //     width = parseInt(this.moveEle.style.minWidth, 10);
-                    // }
                     try {
-                        this.model.colWidths[ToolsUtil.getCellIndex(this.moveEle)[1]] = width;
+                        this.model.resize('width', ToolsUtil.getCellIndex(this.moveEle)[1], width);
                     } catch (e) { return; }
                 } else if (this.wrapper.style.cursor === "row-resize") {
                     var height = parseInt(this.moveEle.style.height, 10) >= this.model.minHeight
                         ? parseInt(this.moveEle.style.height, 10)
                         : this.model.minHeight;
-                    // if (parseInt(this.moveEle.style.height, 10) >= height) {
-                    //     height = parseInt(this.moveEle.style.height, 10);
-                    // }
                     try {
-                        this.model.rowHeights[ToolsUtil.getCellIndex(this.moveEle)[0]] = height;
+                        this.model.resize('height', ToolsUtil.getCellIndex(this.moveEle)[0], height);
                     } catch (e) { return; }
                 }
             }
@@ -110,11 +103,22 @@ Grid.prototype = {
             }
         };
 
+        var _changeCellValue = function (e) {
+            // input -> div -> td
+            try {
+                var indexX = ToolsUtil.getCellIndex(e.target.parentElement.parentElement)[1] - 1;
+                var indexY = ToolsUtil.getCellIndex(e.target.parentElement.parentElement)[0] - 1;
+                this.model.updateCellData(indexX, indexY, e.target.value);
+            } catch (e) {
+                return;
+            }
+        };
 
         this.changeCursor = _changeCursor.bind(this);
         this.resizeMouseDown = _resizeMouseDown.bind(this);
         this.resizeMouseUp = _resizeMouseUp.bind(this);
         this.resizeColAnimation = _resizeColAnimation.bind(this);
+        this.changeCellValue = _changeCellValue.bind(this);
     },
 
     bindTableEvents: function () {
@@ -123,6 +127,7 @@ Grid.prototype = {
         this.wrapper.addEventListener('mousedown', this.resizeMouseDown);
         document.addEventListener('mouseup', this.resizeMouseUp);
         this.wrapper.addEventListener('mousemove', this.resizeColAnimation);
+        this.wrapper.addEventListener('change', this.changeCellValue);
     },
 
     removeTableEvents: function () {
@@ -130,6 +135,7 @@ Grid.prototype = {
         this.wrapper.removeEventListener('mousedown', this.resizeMouseDown);
         document.removeEventListener('mouseup', this.resizeMouseUp);
         this.wrapper.removeEventListener('mousemove', this.resizeColAnimation);
+        this.wrapper.removeEventListener('change', this.changeCellValue);
     },
 
     insertRow: function (index) {
