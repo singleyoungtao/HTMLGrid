@@ -5,6 +5,12 @@ function Grid(data, dom) {
     this.isSwapping = false;
     // this.mouseX = 0;
     // this.mouseY = 0;
+    this.moveEle = null;
+    this.currentMoveEleStartIndexX = null;
+    this.currentMoveEleStartIndexY = null;
+    this.swapType = '';
+    this.preSwapEle = null;
+    this.startSwapEle = null;
 
     this.init(data, dom);
 }
@@ -114,11 +120,129 @@ Grid.prototype = {
             }
         };
 
+        var _swapPositionMouseDown = function (e) {
+            if (this.resizable) { return; }
+
+            var eleIndex, k;
+            try {
+                eleIndex = ToolsUtil.getCellIndex(e.target);
+            } catch (e) {
+                return;
+            }
+
+            this.table = this.container.querySelector('table');
+
+            if (eleIndex[0] === 0 && eleIndex[1] !== 0) {
+                if (e.offsetY < e.target.offsetHeight - this.model.cellPadding && e.offsetX < e.target.offsetWidth - this.model.cellPadding) {
+                    this.isSwapping = true;
+                    this.currentMoveEleStartIndexX = eleIndex[1] - 1;
+                    for (k = 1; k < this.table.rows.length; k++) {
+                        this.table.rows[k].cells[this.currentMoveEleStartIndexX + 1].style.backgroundColor = "green";
+                    }
+                    this.preSwapEle = e.target;
+                    this.startSwapEle = e.target;
+                    this.swapType = 'col';
+                    return;
+                }
+            } else if (eleIndex[1] === 0 && eleIndex[0] !== 0) {
+                if (e.offsetX < e.target.offsetWidth - this.model.cellPadding && e.offsetY < e.target.offsetHeight - this.model.cellPadding) {
+                    this.isSwapping = true;
+                    this.currentMoveEleStartIndexY = eleIndex[0] - 1;
+                    for (k = 1; k < this.table.rows[0].cells.length; k++) {
+                        this.table.rows[this.currentMoveEleStartIndexY + 1].cells[k].style.backgroundColor = "green";
+                    }
+                    this.preSwapEle = e.target;
+                    this.startSwapEle = e.target;
+                    this.swapType = 'row';
+                    return;
+                }
+            }
+        };
+
+        var _swapPositionMouseUp = function (e) {
+            if (this.isSwapping) {
+                if (this.swapType === 'col') {
+                    try {
+                        this.currentMoveEleEndIndexX = ToolsUtil.getCellIndex(e.target)[1] - 1;
+                    } catch (e) {
+                        return;
+                    }
+                    this.swapPosition('col', this.currentMoveEleStartIndexX, this.currentMoveEleEndIndexX);
+                } else if (this.swapType === 'row') {
+                    try {
+                        this.currentMoveEleEndIndexY = ToolsUtil.getCellIndex(e.target)[0] - 1;
+                    } catch (e) {
+                        return;
+                    }
+                    this.swapPosition('row', this.currentMoveEleStartIndexY, this.currentMoveEleEndIndexY);
+                }
+            }
+            this.isSwapping = false;
+        };
+
+        var _swapPositionMouseMove = function (e) {
+            if (this.isSwapping) {
+                e.preventDefault();
+                var currentProcessEleIndex;
+                var preSwapEleIndex;
+                var k;
+                if (this.swapType === 'col') {
+                    if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
+                        try {
+                            currentProcessEleIndex = ToolsUtil.getCellIndex(e.target)[1];
+                        } catch (e) {
+                            return;
+                        }
+                        for (k = 1; k < this.table.rows.length; k++) {
+                            this.table.rows[k].cells[currentProcessEleIndex].style.backgroundColor = "blue";
+                        }
+                        if (this.preSwapEle !== this.startSwapEle) {
+                            try {
+                                preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle)[1];
+                            } catch (e) {
+                                return;
+                            }
+                            for (k = 1; k < this.table.rows.length; k++) {
+                                this.table.rows[k].cells[preSwapEleIndex].style.backgroundColor = "white";
+                            }
+                        }
+                        this.preSwapEle = e.target;
+                    }
+                } else if (this.swapType === 'row') {
+                    if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
+                        try {
+                            currentProcessEleIndex = ToolsUtil.getCellIndex(e.target)[0];
+                        } catch (e) {
+                            return;
+                        }
+                        for (k = 1; k < this.table.rows[0].cells.length; k++) {
+                            this.table.rows[currentProcessEleIndex].cells[k].style.backgroundColor = "blue";
+                        }
+                        if (this.preSwapEle !== this.startSwapEle) {
+                            try {
+                                preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle)[0];
+                            } catch (e) {
+                                return;
+                            }
+                            for (k = 1; k < this.table.rows[0].cells.length; k++) {
+                                this.table.rows[preSwapEleIndex].cells[k].style.backgroundColor = "white";
+                            }
+                        }
+                        this.preSwapEle = e.target;
+                    }
+                }
+            }
+        };
+
+
         this.changeCursor = _changeCursor.bind(this);
         this.resizeMouseDown = _resizeMouseDown.bind(this);
         this.resizeMouseUp = _resizeMouseUp.bind(this);
         this.resizeColAnimation = _resizeColAnimation.bind(this);
         this.changeCellValue = _changeCellValue.bind(this);
+        this.swapPositionMouseDown = _swapPositionMouseDown.bind(this);
+        this.swapPositionMouseUp = _swapPositionMouseUp.bind(this);
+        this.swapPositionMouseMove = _swapPositionMouseMove.bind(this);
     },
 
     bindTableEvents: function () {
@@ -128,6 +252,9 @@ Grid.prototype = {
         document.addEventListener('mouseup', this.resizeMouseUp);
         this.wrapper.addEventListener('mousemove', this.resizeColAnimation);
         this.wrapper.addEventListener('change', this.changeCellValue);
+        this.wrapper.addEventListener('mousedown', this.swapPositionMouseDown);
+        document.addEventListener('mouseup', this.swapPositionMouseUp);
+        this.wrapper.addEventListener('mousemove', this.swapPositionMouseMove);
     },
 
     removeTableEvents: function () {
@@ -136,6 +263,9 @@ Grid.prototype = {
         document.removeEventListener('mouseup', this.resizeMouseUp);
         this.wrapper.removeEventListener('mousemove', this.resizeColAnimation);
         this.wrapper.removeEventListener('change', this.changeCellValue);
+        this.wrapper.removeEventListener('mousedown', this.swapPositionMouseDown);
+        document.removeEventListener('mouseup', this.swapPositionMouseUp);
+        this.wrapper.removeEventListener('mousemove', this.swapPositionMouseMove);
     },
 
     insertRow: function (index) {
