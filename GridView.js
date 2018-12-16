@@ -1,11 +1,16 @@
 var Render = {
-    render: function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY) {
+    render: function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY, isFirstRender) {
 
-        var tableOuterHTML = '<div class="table-container"><table class="grid-table" border="1">';
+        var tableOuterHTML = '<table class="grid-table">';
         tableOuterHTML += this._generateThead(data, rowHeights, colWidths);
         tableOuterHTML += this._generateTbody(data, rowHeights);
-        tableOuterHTML += '</table></div>';
-        container.innerHTML = tableOuterHTML;
+        tableOuterHTML += '</table>';
+        var wrapperOuterHTML = '<div class="table-container">' + tableOuterHTML + '</div>';
+        if (isFirstRender) {
+            container.innerHTML = wrapperOuterHTML;
+        } else {
+            container.querySelector('.table-container').innerHTML = tableOuterHTML;
+        }
         this._initCellBox(container, cellBoxY, cellBoxX);
     },
 

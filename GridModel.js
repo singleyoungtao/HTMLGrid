@@ -1,5 +1,7 @@
 function Model(data) {
     this.data = data;
+    this.minWidth = 55;
+    this.minHeight = 25;
     this.defaultHeight = 25;
     this.defaultWidth = 80;
     this.cellPadding = '10';

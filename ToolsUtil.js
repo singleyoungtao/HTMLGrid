@@ -6,5 +6,9 @@ var ToolsUtil = {
             arr[i] = "";
         }
         return arr;
+    },
+
+    getCellIndex: function (element) {
+        return element.getAttribute('data-index').split('-').map(Number);
     }
 };

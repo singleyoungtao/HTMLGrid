@@ -3,7 +3,7 @@
     max-width: 1200px;
     max-height: 800px;
     border-radius: 3px;
-    border: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .table-container:focus {
@@ -12,18 +12,20 @@
 
 .grid-table {
     border-collapse: collapse;
-    table-layout: fixed;
+    /*table-layout: fixed;*/
 }
 
 .grid-table th {
     vertical-align: middle;
     text-align: center;
     background-color: #aaaaaa;
+    border: 1px solid black;
 }
 
 .grid-table td {
     vertical-align: middle;
     text-align: center;
+    border: 1px solid black;
 }
 
 .grid-table td input{
