@@ -391,6 +391,13 @@ Grid.prototype = {
         this.render();
     },
 
+    transInputIndex: function (index) {
+        if (ToolsUtil.isNumber(index)) {
+            return index > 0 ? index -1 : index;
+        }
+        return;
+    },
+
     moveCell: function (type) {
         var e = {};
         switch (type) {

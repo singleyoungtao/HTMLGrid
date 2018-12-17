@@ -72,6 +72,11 @@
         ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
         ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
         [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "20"],
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
     ];
 
     var container = document.getElementById('HtmlGrid');
@@ -80,45 +85,45 @@
     // delete row
     function deleteRow() {
         var index = Number(document.getElementById('DeleteRowIndex').value);
-        grid.deleteRow(index);
+        grid.deleteRow(grid.transInputIndex(index));
         document.getElementById('DeleteRowIndex').value = "";
     }
 
     // delete col
     function deleteCol() {
         var index = Number(document.getElementById('DeleteColIndex').value);
-        grid.deleteCol(index);
+        grid.deleteCol(grid.transInputIndex(index));
         document.getElementById('DeleteColIndex').value = "";
     }
 
     // insert row
     function insertRow() {
         var index = Number(document.getElementById('InsertRowIndex').value);
-        grid.insertRow(index);
+        grid.insertRow(grid.transInputIndex(index));
         document.getElementById('InsertRowIndex').value = "";
     }
 
     // insert col
     function insertCol() {
         var index = Number(document.getElementById('InsertColIndex').value);
-        grid.insertCol(index);
+        grid.insertCol(grid.transInputIndex(index));
         document.getElementById('InsertColIndex').value = "";
     }
 
     // swap col
     function swapCol() {
-        var indexA = document.getElementById('SwapColInputA').value;
-        var indexB = document.getElementById('SwapColInputB').value;
-        grid.swapPosition('col', Number(indexA), Number(indexB));
+        var indexA = Number(document.getElementById('SwapColInputA').value);
+        var indexB = Number(document.getElementById('SwapColInputB').value);
+        grid.swapPosition('col', grid.transInputIndex(indexA), grid.transInputIndex(indexB));
         document.getElementById('SwapColInputA').value = "";
         document.getElementById('SwapColInputB').value = "";
     }
 
     // swap row
     function swapRow() {
-        var indexA = document.getElementById('SwapRowInputA').value;
-        var indexB = document.getElementById('SwapRowInputB').value;
-        grid.swapPosition('row', Number(indexA), Number(indexB));
+        var indexA = Number(document.getElementById('SwapRowInputA').value);
+        var indexB = Number(document.getElementById('SwapRowInputB').value);
+        grid.swapPosition('row', grid.transInputIndex(indexA), grid.transInputIndex(indexB));
         document.getElementById('SwapRowInputA').value = "";
         document.getElementById('SwapRowInputB').value = "";
     }

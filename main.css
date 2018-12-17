@@ -1,7 +1,7 @@
 .table-container {
     overflow: auto;
     max-width: 1200px;
-    max-height: 800px;
+    max-height: 600px;
     border-radius: 3px;
     border-right: 1px solid black;
     -webkit-touch-callout: none;
