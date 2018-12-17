@@ -36,7 +36,7 @@ var Render = {
             for (j = 0; j < tdNum; j++) {
                 trHTMLString += '<td data-index="' + (i + 1) + '-' + (j + 1) + '"><div><input value="' + data[i][j] + '"></div></td>';
             }
-            trHTMLString += `</tr>`;
+            trHTMLString += '</tr>';
         }
         return trHTMLString;
     },
