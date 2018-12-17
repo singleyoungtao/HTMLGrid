@@ -416,4 +416,10 @@ Grid.prototype = {
         this.preCellBoxX = this.model.cellBoxX;
         this.preCellBoxY = this.model.cellBoxY;
     },
+
+    destory: function () {
+        this.removeTableEvents();
+        this.model = null;
+        Render.removeDOM(this.container);
+    }
 };

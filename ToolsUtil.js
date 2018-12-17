@@ -16,9 +16,8 @@ var ToolsUtil = {
             return;
         },
 
-        deleteInstance: function (instance, container) {
-            instance.removeTableEvents();
-            Render.removeDOM(container);
+        deleteInstance: function (instance) {
+            instance.destory();
             var instanceKeys = Object.keys(instance);
             instanceKeys.forEach(function (item) {
                 delete instance[item];
