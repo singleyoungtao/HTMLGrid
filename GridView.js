@@ -43,8 +43,8 @@ var Render = {
     },
 
     _generateContextMenu: function () {
-        return '<div class="context-menu"><ul><li class="insertRow">插入行</li><li class="insertCol">插入列</li>' +
-            '<li class="deleteRow">删除行</li><li class="deleteCol">删除列</li></ul></div>';
+        return '<div class="context-menu"><ul><li data-type="insert-row" class="row">插入行</li><li data-type="insert-col" class="col">插入列</li>' +
+            '<li data-type="delete-row" class="row">删除行</li><li data-type="delete-col" class="col">删除列</li></ul></div>';
     },
 
     _initCellBox: function (container, cellBoxY, cellBoxX) {

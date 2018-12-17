@@ -322,15 +322,19 @@ Grid.prototype = {
             contextMenu.style.visibility = "visible";
             this.clickEle = e.target;
             if (eleIndex[0] === 0) {
-                contextMenu.querySelector('.insertCol').style = "display: block;";
-                contextMenu.querySelector('.deleteCol').style = "display: block;";
-                contextMenu.querySelector('.insertRow').style = "display: none;";
-                contextMenu.querySelector('.deleteRow').style = "display: none;";
+                contextMenu.querySelectorAll('.col').forEach(function (item) {
+                    item.style.display = 'block';
+                });
+                contextMenu.querySelectorAll('.row').forEach(function (item) {
+                    item.style.display = 'none';
+                });
             } else if (eleIndex[1] === 0) {
-                contextMenu.querySelector('.insertCol').style = "display: none;";
-                contextMenu.querySelector('.deleteCol').style = "display: none;";
-                contextMenu.querySelector('.insertRow').style = "display: block;";
-                contextMenu.querySelector('.deleteRow').style = "display: block;";
+                contextMenu.querySelectorAll('.row').forEach(function (item) {
+                    item.style.display = 'block';
+                });
+                contextMenu.querySelectorAll('.col').forEach(function (item) {
+                    item.style.display = 'none';
+                });
             }
         };
 
@@ -343,18 +347,19 @@ Grid.prototype = {
 
         var _contextMenuOperate = function (e) {
             var eleIndex = ToolsUtil.getCellIndex(this.clickEle);
+            var type = e.target.getAttribute('data-type');
             if (eleIndex) {
-                switch (e.target.getAttribute('class')) {
-                    case "insertRow" :
+                switch (type) {
+                    case "insert-row":
                         this.insertRow(eleIndex[0] - 1);
                         break;
-                    case "insertCol":
+                    case "insert-col":
                         this.insertCol(eleIndex[1] - 1);
                         break;
-                    case "deleteRow":
+                    case "delete-row":
                         this.deleteRow(eleIndex[0] - 1);
                         break;
-                    case "deleteCol":
+                    case "delete-col":
                         this.deleteCol(eleIndex[1] - 1);
                         break;
                     default:
