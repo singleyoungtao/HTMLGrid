@@ -3,16 +3,16 @@ function Model(data) {
     this.minWidth = 55;
     this.minHeight = 25;
     this.defaultHeight = 25;
-    this.defaultWidth = 80;
+    this.defaultWidth = 100;
     this.cellPadding = '10';
     this.cellBoxX = 1;
     this.cellBoxY = 1;
 
     this.colWidths = ToolsUtil.initEmptyArr(this.data[0].length +1).map(function () {
-        return 80;
+        return 100;
     });
 
-    this.colWidths[0] = 25;
+    this.colWidths[0] = 60;
 
     this.rowHeights = ToolsUtil.initEmptyArr(this.data.length + 1).map(function () {
         return 25;

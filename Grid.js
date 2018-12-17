@@ -145,7 +145,7 @@ Grid.prototype = {
                     this.isSwapping = true;
                     this.currentMoveEleStartIndexX = eleIndex[1] - 1;
                     for (k = 1; k < this.table.rows.length; k++) {
-                        this.table.rows[k].cells[this.currentMoveEleStartIndexX + 1].style.backgroundColor = "#009a61";
+                        this.table.rows[k].cells[this.currentMoveEleStartIndexX + 1].style.backgroundColor = "#ebf7f3";
                     }
                     this.preSwapEle = e.target;
                     this.startSwapEle = e.target;
@@ -157,7 +157,7 @@ Grid.prototype = {
                     this.isSwapping = true;
                     this.currentMoveEleStartIndexY = eleIndex[0] - 1;
                     for (k = 1; k < this.table.rows[0].cells.length; k++) {
-                        this.table.rows[this.currentMoveEleStartIndexY + 1].cells[k].style.backgroundColor = "#009a61";
+                        this.table.rows[this.currentMoveEleStartIndexY + 1].cells[k].style.backgroundColor = "#ebf7f3";
                     }
                     this.preSwapEle = e.target;
                     this.startSwapEle = e.target;
@@ -208,7 +208,7 @@ Grid.prototype = {
                             return;
                         }
                         for (k = 1; k < this.table.rows.length; k++) {
-                            this.table.rows[k].cells[currentProcessEleIndex[1]].style.backgroundColor = "#83d0f2";
+                            this.table.rows[k].cells[currentProcessEleIndex[1]].style.backgroundColor = "#ecf3ff";
                         }
                         if (this.preSwapEle !== this.startSwapEle) {
                             for (k = 1; k < this.table.rows.length; k++) {
@@ -224,7 +224,7 @@ Grid.prototype = {
                             return;
                         }
                         for (k = 1; k < this.table.rows[0].cells.length; k++) {
-                            this.table.rows[currentProcessEleIndex[0]].cells[k].style.backgroundColor = "#83d0f2";
+                            this.table.rows[currentProcessEleIndex[0]].cells[k].style.backgroundColor = "#ecf3ff";
                         }
                         if (this.preSwapEle !== this.startSwapEle) {
                             for (k = 1; k < this.table.rows[0].cells.length; k++) {

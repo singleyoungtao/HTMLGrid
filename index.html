@@ -10,45 +10,54 @@
 <body>
 <div class="htmlGrid" id="HtmlGrid"></div>
 <div class="control-panel">
-    <div>
-        <input id="DeleteRowIndex" type="text">
-        <button id="DeleteRow" onclick="deleteRow()">Delete Row</button>
+    <div class="control-input-panel">
+        <div class="control-input-delete">
+        <div>
+            <input id="DeleteRowIndex" type="text" placeholder="Input Index">
+            <button id="DeleteRow" onclick="deleteRow()">Delete Row</button>
+            <input id="DeleteColIndex" type="text" placeholder="Input Index">
+            <button id="DeleteCol" onclick="deleteCol()">Delete Col</button>
+        </div>
+        <div>
+            <input id="InsertRowIndex" type="text" placeholder="Input Index">
+            <button id="InsertRow" onclick="insertRow()">Insert Row</button>
+            <input id="InsertColIndex" type="text" placeholder="Input Index">
+            <button id="InsertCol" onclick="insertCol()">Insert Col</button>
+        </div>
+        </div>
+        <div class="control-swap">
+        <div>
+            <label for="SwapColInputA">IndexA</label>
+            <input id="SwapColInputA" type="text" placeholder="Input Index">
+            <label for="SwapColInputB">IndexB</label>
+            <input id="SwapColInputB" type="text" placeholder="Input Index">
+            <button id="SwapCol" onclick="swapCol()">SwapCol</button>
+        </div>
+        <div>
+            <label for="SwapRowInputA">IndexA</label>
+            <input id="SwapRowInputA" type="text" placeholder="Input Index">
+            <label for="SwapRowInputB">IndexB</label>
+            <input id="SwapRowInputB" type="text" placeholder="Input Index">
+            <button id="SwapRow" onclick="swapRow()">SwapRow</button>
+        </div>
+        </div>
     </div>
-    <div>
-        <input id="DeleteColIndex" type="text">
-        <button id="DeleteCol" onclick="deleteCol()">Delete Col</button>
+    <div class="control-move-panel">
+        <div>
+            <button id="MoveUp" onclick="moveCell('up')">&uarr;</button>
+        </div>
+        <div>
+            <button id="MoveLeft" onclick="moveCell('left')">&larr;</button>
+            <button id="MoveRight" onclick="moveCell('right')">&rarr;</button>
+        </div>
+        <div>
+            <button id="MoveDown" onclick="moveCell('down')">&darr;</button>
+        </div>
     </div>
-    <div>
-        <input id="InsertRowIndex" type="text">
-        <button id="InsertRow" onclick="insertRow()">Insert Row</button>
-    </div>
-    <div>
-        <input id="InsertColIndex" type="text">
-        <button id="InsertCol" onclick="insertCol()">Insert Col</button>
-    </div>
-    <div>
-        IndexA <input id="SwapColInputA" type="text">
-        IndexB <input id="SwapColInputB" type="text">
-        <button id="SwapCol" onclick="swapCol()">SwapCol</button>
-    </div>
-    <div>
-        IndexA <input id="SwapRowInputA" type="text">
-        IndexB <input id="SwapRowInputB" type="text">
-        <button id="SwapRow" onclick="swapRow()">SwapRow</button>
-    </div>
-    <div style="margin-left: 45px;">
-        <button id="MoveUp" onclick="moveCell('up')">Move Up</button>
-    </div>
-    <div>
-        <button id="MoveLeft" onclick="moveCell('left')">Move Left</button>
-        <button id="MoveRight" onclick="moveCell('right')">Move Right</button>
-    </div>
-    <div style="margin-left: 45px">
-        <button id="MoveDown" onclick="moveCell('down')">Move Down</button>
-    </div>
-    <div>
+    <div class="destory-btn">
         <button id="Destory" onclick="destory()">Destory</button>
     </div>
+
 </div>
 </body>
 <script src="ToolsUtil.js"></script>
@@ -131,7 +140,7 @@
     function moveCell(type) {
         grid.moveCell(type);
     }
-    
+
     function destory() {
         ToolsUtil.deleteInstance(grid)
     }

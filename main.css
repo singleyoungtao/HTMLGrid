@@ -3,7 +3,7 @@
     max-width: 1200px;
     max-height: 600px;
     border-radius: 3px;
-    border-right: 1px solid black;
+    border-right: 1px solid #d9d9d9;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -56,14 +56,25 @@
 .grid-table th {
     vertical-align: middle;
     text-align: center;
-    background-color: #aaaaaa;
-    border: 1px solid black;
+    background-color: #f3f3f3;
+    border: 1px solid #C0C0C0;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
 }
 
 .grid-table td {
     vertical-align: middle;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #d9d9d9;
+}
+
+.grid-table .table-col {
+    border: 1px solid #C0C0C0;
+    background-color: #f3f3f3;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 10px;
 }
 
 .grid-table td input{
@@ -83,10 +94,115 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 10px;
 }
 
 .grid-table td div {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+}
+
+.control-panel {
+    width: 700px;
+    border:1px solid #C0C0C0;
+    margin: 30px;
+    padding: auto;
+}
+
+.control-panel input {
+    width: 100px;
+    height: 18px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.control-panel label {
+    margin-left: 15px;
+}
+
+button {
+    display: inline-block;
+    padding: 6px 6px;
+    width: 80px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.control-input-panel {
+    position: relative;
+    float: left;
+    margin-right: 50px;
+}
+
+.control-input-delete {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.control-input-delete div {
+    margin-bottom: 10px;
+}
+
+.control-swap div {
+    margin-bottom: 10px;
+}
+
+.control-move-panel {
+    position: relative;
+    float: right;
+    margin-left: 20px;
+    margin-top: 20px;
+    border: 1px solid grey;
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.control-move-panel button {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+#MoveUp, #MoveDown {
+    margin-left: 35px;
+}
+
+#MoveRight {
+    float: right;
+}
+
+.destory-btn button{
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    margin-top: 20px;
 }
