@@ -142,10 +142,10 @@ button {
     white-space: nowrap;
     vertical-align: middle;
     user-select: none;
-    background-image: none;
     border: 1px solid #ccc;
     border-radius: 10px;
     cursor: pointer;
+    background-color: #f3f3f3;
 }
 
 button:hover {
@@ -161,8 +161,9 @@ button:hover {
 }
 
 .control-input-delete {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 20px;
+    border-bottom: 1px #C0C0C0 dashed;
 }
 
 .control-input-delete div {
@@ -204,5 +205,10 @@ button:hover {
     position: relative;
     float: right;
     margin-right: 15px;
-    margin-top: 20px;
+    margin-top: 36px;
+    background-color: #e6e6e6;
+}
+
+.destory-btn button:hover {
+    background-color: #808080;
 }
