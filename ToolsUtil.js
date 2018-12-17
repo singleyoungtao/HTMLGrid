@@ -9,7 +9,11 @@ var ToolsUtil = {
         },
 
         getCellIndex: function (element) {
-            return element.getAttribute('data-index').split('-').map(Number);
+            var dataIndex = element.getAttribute('data-index');
+            if (dataIndex) {
+                return element.getAttribute('data-index').split('-').map(Number);
+            }
+            return;
         },
 
         deleteInstance: function (instance, container) {

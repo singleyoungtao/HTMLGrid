@@ -26,17 +26,15 @@ Grid.prototype = {
         this.isFirstRender = false;
     },
 
-    render: function() {
+    render: function () {
         Render.render(this.model.data, this.container, this.model.rowHeights, this.model.colWidths, this.model.cellBoxX, this.model.cellBoxY, this.isFirstRender);
     },
 
     initBind: function () {
-        var  _changeCursor = function (e) {
+        var _changeCursor = function (e) {
             if (this.isResizing || this.isSwapping) return;
-            var eleIndex;
-            try {
-                eleIndex = ToolsUtil.getCellIndex(e.target);
-            } catch (e) {
+            var eleIndex = ToolsUtil.getCellIndex(e.target);
+            if (!eleIndex) {
                 return;
             }
 
@@ -76,20 +74,27 @@ Grid.prototype = {
 
         var _resizeMouseUp = function () {
             if (this.isResizing) {
+                var resizeIndex;
                 if (this.wrapper.style.cursor === "col-resize") {
                     var width = parseInt(this.moveEle.style.minWidth, 10) >= this.model.minWidth
                         ? parseInt(this.moveEle.style.minWidth, 10)
                         : this.model.minWidth;
-                    try {
-                        this.model.resize('width', ToolsUtil.getCellIndex(this.moveEle)[1], width);
-                    } catch (e) { return; }
+                    resizeIndex = ToolsUtil.getCellIndex(this.moveEle);
+                    if (resizeIndex) {
+                        this.model.resize('width', resizeIndex[1], width);
+                    } else {
+                        return;
+                    }
                 } else if (this.wrapper.style.cursor === "row-resize") {
                     var height = parseInt(this.moveEle.style.height, 10) >= this.model.minHeight
                         ? parseInt(this.moveEle.style.height, 10)
                         : this.model.minHeight;
-                    try {
-                        this.model.resize('height', ToolsUtil.getCellIndex(this.moveEle)[0], height);
-                    } catch (e) { return; }
+                    resizeIndex = ToolsUtil.getCellIndex(this.moveEle);
+                    if (resizeIndex) {
+                        this.model.resize('height', resizeIndex[0], height);
+                    } else {
+                        return;
+                    }
                 }
             }
             this.isResizing = false;
@@ -111,25 +116,26 @@ Grid.prototype = {
 
         var _changeCellValue = function (e) {
             // input -> div -> td
-            try {
-                var indexX = ToolsUtil.getCellIndex(e.target.parentElement.parentElement)[1] - 1;
-                var indexY = ToolsUtil.getCellIndex(e.target.parentElement.parentElement)[0] - 1;
+            var index = ToolsUtil.getCellIndex(e.target.parentElement.parentElement);
+            if (index) {
+                var indexX = index[1] - 1;
+                var indexY = index[0] - 1;
                 this.model.updateCellData(indexX, indexY, e.target.value);
-            } catch (e) {
+            } else {
                 return;
             }
         };
 
         var _swapPositionMouseDown = function (e) {
-            if (this.resizable) { return; }
-
-            var eleIndex, k;
-            try {
-                eleIndex = ToolsUtil.getCellIndex(e.target);
-            } catch (e) {
+            if (this.resizable) {
                 return;
             }
 
+            var k;
+            var eleIndex = ToolsUtil.getCellIndex(e.target);
+            if (!eleIndex) {
+                return;
+            }
             this.table = this.container.querySelector('table');
 
             if (eleIndex[0] === 0 && eleIndex[1] !== 0) {
@@ -161,17 +167,20 @@ Grid.prototype = {
 
         var _swapPositionMouseUp = function (e) {
             if (this.isSwapping) {
+                var currentMoveEleEndIndex;
                 if (this.swapType === 'col') {
-                    try {
-                        this.currentMoveEleEndIndexX = ToolsUtil.getCellIndex(e.target)[1] - 1;
-                    } catch (e) {
+                    currentMoveEleEndIndex = ToolsUtil.getCellIndex(e.target);
+                    if (currentMoveEleEndIndex) {
+                        this.currentMoveEleEndIndexX = currentMoveEleEndIndex[1] - 1;
+                    } else {
                         return;
                     }
                     this.swapPosition('col', this.currentMoveEleStartIndexX, this.currentMoveEleEndIndexX);
                 } else if (this.swapType === 'row') {
-                    try {
-                        this.currentMoveEleEndIndexY = ToolsUtil.getCellIndex(e.target)[0] - 1;
-                    } catch (e) {
+                    currentMoveEleEndIndex = ToolsUtil.getCellIndex(e.target);
+                    if (currentMoveEleEndIndex) {
+                        this.currentMoveEleEndIndexY =currentMoveEleEndIndex[0] - 1;
+                    } else {
                         return;
                     }
                     this.swapPosition('row', this.currentMoveEleStartIndexY, this.currentMoveEleEndIndexY);
@@ -184,13 +193,10 @@ Grid.prototype = {
         var _swapPositionMouseMove = function (e) {
             if (this.isSwapping) {
                 e.preventDefault();
-                var currentProcessEleIndex;
-                var preSwapEleIndex;
+                var currentProcessEleIndex = ToolsUtil.getCellIndex(e.target);
+                var preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
                 var k;
-                try {
-                    preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
-                    currentProcessEleIndex = ToolsUtil.getCellIndex(e.target);
-                } catch (e) {
+                if (! (currentProcessEleIndex && preSwapEleIndex)) {
                     this.isSwapping = false;
                     return;
                 }
@@ -237,35 +243,42 @@ Grid.prototype = {
                 case 37:
                     // left
                     if (this.model.cellBoxX - 1 > 0) {
-                        this.model.updateFocusedCellCoordinates('left');
-                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
-                        this.preCellBoxX = this.model.cellBoxX;
+                        this.updateCellBox('left')
                     }
                     break;
                 case 38:
                     // up
                     if (this.model.cellBoxY - 1 > 0) {
-                        this.model.updateFocusedCellCoordinates('up');
-                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
-                        this.preCellBoxY = this.model.cellBoxY;
+                        this.updateCellBox('up')
                     }
                     break;
                 case 9:
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                    if (e.shiftKey) {
+                        if (this.model.cellBoxX - 1 > 0) {
+                            this.updateCellBox('left')
+                        }
+                    } else {
+                        if (this.model.cellBoxX + 1 < this.model.data[0].length) {
+                            this.updateCellBox('right')
+                        }
+                    }
+                    break;
                 case 39:
                     // right
-                    if (this.model.cellBoxX + 1 < this.model.data[0].length) {
-                        if (e.preventDefault) { e.preventDefault(); }
-                        this.model.updateFocusedCellCoordinates('right');
-                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
-                        this.preCellBoxX = this.model.cellBoxX;
+                    if (this.model.cellBoxX + 1 <= this.model.data[0].length) {
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        }
+                        this.updateCellBox('right')
                     }
                     break;
                 case 40:
                     // down
-                    if (this.model.cellBoxY + 1 < this.model.data.length) {
-                        this.model.updateFocusedCellCoordinates('down');
-                        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
-                        this.preCellBoxY = this.model.cellBoxY;
+                    if (this.model.cellBoxY + 1 <= this.model.data.length) {
+                        this.updateCellBox('down')
                     }
                     break;
                 default:
@@ -274,16 +287,17 @@ Grid.prototype = {
         };
 
         var _focuseCell = function (e) {
-            var eleIndex;
-            try {
-                eleIndex = ToolsUtil.getCellIndex(e.target.parentElement.parentElement);
-            } catch (e) {
+            var eleIndex = ToolsUtil.getCellIndex(e.target.parentElement.parentElement);
+            if (!eleIndex) {
                 return;
             }
 
             if (eleIndex[0] > 0 && eleIndex[1] > 0) {
                 this.model.cellBoxX = eleIndex[1];
                 this.model.cellBoxY = eleIndex[0];
+                if (this.preCellBoxX === this.model.cellBoxX && this.preCellBoxY === this.model.cellBoxY) {
+                    return;
+                }
                 Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
                 this.preCellBoxX = this.model.cellBoxX;
                 this.preCellBoxY = this.model.cellBoxY;
@@ -338,31 +352,41 @@ Grid.prototype = {
     },
 
     insertRow: function (index) {
-        if (!ToolsUtil.isNumber(index)) { return; }
+        if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
         this.model.insertRow(index);
         this.render();
     },
 
     insertCol: function (index) {
-        if (!ToolsUtil.isNumber(index)) { return; }
+        if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
         this.model.insertCol(index);
         this.render();
     },
 
     deleteRow: function (index) {
-        if (!ToolsUtil.isNumber(index)) { return; }
+        if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
         this.model.deleteRow(index);
         this.render();
     },
 
     deleteCol: function (index) {
-        if (!ToolsUtil.isNumber(index)) { return; }
+        if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
         this.model.deleteCol(index);
         this.render();
     },
 
     swapPosition: function (type, indexA, indexB) {
-        if (!ToolsUtil.isNumber(indexA) && !ToolsUtil.isNumber(indexB)) { return; }
+        if (!ToolsUtil.isNumber(indexA) && !ToolsUtil.isNumber(indexB)) {
+            return;
+        }
         this.model.swapPosition(type, indexA, indexB);
         this.render();
     },
@@ -384,5 +408,12 @@ Grid.prototype = {
                 break;
         }
         this.moveCellFocus(e);
-    }
+    },
+
+    updateCellBox: function (type) {
+        this.model.updateFocusedCellCoordinates(type);
+        Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
+        this.preCellBoxX = this.model.cellBoxX;
+        this.preCellBoxY = this.model.cellBoxY;
+    },
 };

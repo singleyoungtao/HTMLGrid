@@ -18,9 +18,9 @@ var Render = {
         var theadNum = data[0].length;
         var i;
         var theadHTMLString = '<thead class="grid-thead"><tr><th data-index="0-0" style="height: ' + rowHeights[0] +
-            'px; min-width: ' + colWidths[0] + 'px">&spades;</th>';
+            'px; min-width: ' + colWidths[0] + 'px"></th>';
         for (i = 0; i < theadNum; i++) {
-            theadHTMLString += '<th data-index="0-' + (i + 1) + '"  style="min-width: ' + colWidths[i + 1] + 'px;">' + i + '</th>';
+            theadHTMLString += '<th data-index="0-' + (i + 1) + '"  style="min-width: ' + colWidths[i + 1] + 'px;">' + (i+1) + '</th>';
         }
         theadHTMLString += '</tr></thead>';
         return theadHTMLString;
@@ -32,7 +32,7 @@ var Render = {
         var i, j;
         var trHTMLString = "";
         for (i = 0; i < trNum; i++) {
-            trHTMLString += '<tr><td data-index="' + (i + 1) + '-0" style="background-color: #aaaaaa; height:' + rowHeights[i + 1] + 'px;">' + i;
+            trHTMLString += '<tr><td data-index="' + (i + 1) + '-0" style="background-color: #aaaaaa; height:' + rowHeights[i + 1] + 'px;">' + (i+1);
             for (j = 0; j < tdNum; j++) {
                 trHTMLString += '<td data-index="' + (i + 1) + '-' + (j + 1) + '"><div><input value="' + data[i][j] + '"></div></td>';
             }
