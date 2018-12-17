@@ -197,13 +197,11 @@ Grid.prototype = {
                 var preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
                 var k;
                 if (! (currentProcessEleIndex && preSwapEleIndex)) {
-                    this.isSwapping = false;
                     return;
                 }
                 if (this.swapType === 'col') {
                     if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
                         if (currentProcessEleIndex[0] !== 0) {
-                            this.isSwapping = false;
                             this.render();
                             return;
                         }
@@ -220,7 +218,6 @@ Grid.prototype = {
                 } else if (this.swapType === 'row') {
                     if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
                         if (currentProcessEleIndex[1] !== 0) {
-                            this.isSwapping = false;
                             this.render();
                             return;
                         }
