@@ -26,5 +26,9 @@ var ToolsUtil = {
 
     isNumber: function (obj) {
         return obj === +obj && obj >= 0;
+    },
+
+    contains: function (childEle, parentEle) {
+        return parentEle.contains(childEle);
     }
 };

@@ -7,7 +7,8 @@ var Render = {
         tableOuterHTML += '</table>';
         var wrapperOuterHTML = '<div class="table-container">' + tableOuterHTML + '</div>';
         if (isFirstRender) {
-            container.innerHTML = wrapperOuterHTML;
+            container.setAttribute('class', container.getAttribute('class') + ' grid-container');
+            container.innerHTML = wrapperOuterHTML + this._generateContextMenu();
         } else {
             container.querySelector('.table-container').innerHTML = tableOuterHTML;
         }
@@ -39,6 +40,11 @@ var Render = {
             trHTMLString += '</tr>';
         }
         return trHTMLString;
+    },
+
+    _generateContextMenu: function () {
+        return '<div class="context-menu"><ul><li class="insertRow">插入行</li><li class="insertCol">插入列</li>' +
+            '<li class="deleteRow">删除行</li><li class="deleteCol">删除列</li></ul></div>';
     },
 
     _initCellBox: function (container, cellBoxY, cellBoxX) {

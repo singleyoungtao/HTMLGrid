@@ -11,6 +11,7 @@ function Grid(data, dom) {
     this.startSwapEle = null;
     this.preCellBoxX = 1;
     this.preCellBoxY = 1;
+    this.clickEle = null;
 
     this.init(data, dom);
 }
@@ -21,6 +22,7 @@ Grid.prototype = {
         this.container = container;
         this.render();
         this.wrapper = container.querySelector('.table-container');
+        this.contextMenuEle = container.querySelector('.context-menu');
         this.initBind();
         this.bindTableEvents();
         this.isFirstRender = false;
@@ -307,6 +309,61 @@ Grid.prototype = {
             this.render();
         };
 
+        var _showContextMenu = function (e) {
+            var eleIndex = ToolsUtil.getCellIndex(e.target);
+            if (!eleIndex || (eleIndex[0] !== 0 && eleIndex [1] !== 0) || (eleIndex[0] === 0 && eleIndex[1] === 0)) {
+                return;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            var contextMenu = this.container.querySelector('.context-menu');
+            contextMenu.style.top = e.clientY + 'px';
+            contextMenu.style.left = e.clientX + 'px';
+            contextMenu.style.visibility = "visible";
+            this.clickEle = e.target;
+            if (eleIndex[0] === 0) {
+                contextMenu.querySelector('.insertCol').style = "display: block;";
+                contextMenu.querySelector('.deleteCol').style = "display: block;";
+                contextMenu.querySelector('.insertRow').style = "display: none;";
+                contextMenu.querySelector('.deleteRow').style = "display: none;";
+            } else if (eleIndex[1] === 0) {
+                contextMenu.querySelector('.insertCol').style = "display: none;";
+                contextMenu.querySelector('.deleteCol').style = "display: none;";
+                contextMenu.querySelector('.insertRow').style = "display: block;";
+                contextMenu.querySelector('.deleteRow').style = "display: block;";
+            }
+        };
+
+        var _closeContextMenu = function (e) {
+            if (this.contextMenuEle.contains(e.target)) {
+                return;
+            }
+            this.contextMenuEle.style.visibility = "hidden";
+        };
+
+        var _contextMenuOperate = function (e) {
+            var eleIndex = ToolsUtil.getCellIndex(this.clickEle);
+            if (eleIndex) {
+                switch (e.target.getAttribute('class')) {
+                    case "insertRow" :
+                        this.insertRow(eleIndex[0] - 1);
+                        break;
+                    case "insertCol":
+                        this.insertCol(eleIndex[1] - 1);
+                        break;
+                    case "deleteRow":
+                        this.deleteRow(eleIndex[0] - 1);
+                        break;
+                    case "deleteCol":
+                        this.deleteCol(eleIndex[1] - 1);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            this.contextMenuEle.style.visibility = "hidden";
+        };
+
         this.changeCursor = _changeCursor.bind(this);
         this.resizeMouseDown = _resizeMouseDown.bind(this);
         this.resizeMouseUp = _resizeMouseUp.bind(this);
@@ -318,6 +375,9 @@ Grid.prototype = {
         this.moveCellFocus = _moveCellFocus.bind(this);
         this.focuseCell = _focuseCell.bind(this);
         this.swapPositionMouseLeave = _swapPositionMouseLeave.bind(this);
+        this.showContextMenu = _showContextMenu.bind(this);
+        this.closeContextMenu = _closeContextMenu.bind(this);
+        this.contextMenuOperate = _contextMenuOperate.bind(this);
     },
 
     bindTableEvents: function () {
@@ -333,6 +393,9 @@ Grid.prototype = {
         this.wrapper.addEventListener('keydown', this.moveCellFocus);
         this.wrapper.addEventListener('click', this.focuseCell);
         this.wrapper.addEventListener('mouseleave', this.swapPositionMouseLeave);
+        this.wrapper.addEventListener('contextmenu', this.showContextMenu);
+        document.addEventListener('click', this.closeContextMenu);
+        this.contextMenuEle.addEventListener('click', this.contextMenuOperate);
     },
 
     removeTableEvents: function () {
@@ -346,6 +409,9 @@ Grid.prototype = {
         this.wrapper.removeEventListener('mousemove', this.swapPositionMouseMove);
         this.wrapper.removeEventListener('keydown', this.moveCellFocus);
         this.wrapper.removeEventListener('click', this.focuseCell);
+        this.wrapper.removeEventListener('contextmenu', this.showContextMenu);
+        document.removeEventListener('click', this.closeContextMenu);
+        this.contextMenuEle.removeEventListener('click', this.contextMenuOperate);
     },
 
     insertRow: function (index) {
