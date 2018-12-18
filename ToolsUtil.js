@@ -53,13 +53,25 @@ var ToolsUtil = {
     convert10DTo26D: function (num) {
         var code = '';
         var temp;
-        for (num; num>0; num=(num-temp)/26) {
-            temp = num%26;
+        for (num; num > 0; num = (num - temp) / 26) {
+            temp = num % 26;
             if (temp === 0) {
                 temp = 26;
             }
             code = String.fromCharCode(64 + parseInt(temp)) + code;
         }
         return code;
+    },
+
+    convert26DTo10D: function (code) {
+        var num = 0;
+        var reg = /^[A-Z]+$/g;
+        if (!reg.test(code)) {
+            return "Input 26 Decimal Number";
+        }
+        for (var i = code.length - 1, j = 1; i >= 0; i--, j *= 26) {
+            num += (code[i].charCodeAt() - 64) * j;
+        }
+        return num;
     }
 };

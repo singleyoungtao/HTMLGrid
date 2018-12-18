@@ -100,7 +100,16 @@
 
     // delete col
     function deleteCol() {
-        var index = Number(document.getElementById('DeleteColIndex').value);
+        var index = document.getElementById('DeleteColIndex').value;
+        var reg = /^\d+$/g;
+        if (reg.test(index)) {
+            index = Number(index);
+        } else {
+            reg = /^[A-Z]+$/g;
+            if (reg.test(index)) {
+                index = ToolsUtil.convert26DTo10D(index);
+            }
+        }
         grid.deleteCol(grid.transInputIndex(index));
         document.getElementById('DeleteColIndex').value = "";
     }
@@ -114,15 +123,15 @@
 
     // insert col
     function insertCol() {
-        var index = Number(document.getElementById('InsertColIndex').value);
+        var index = convertToNumber(document.getElementById('InsertColIndex').value);
         grid.insertCol(grid.transInputIndex(index));
         document.getElementById('InsertColIndex').value = "";
     }
 
     // swap col
     function swapCol() {
-        var indexA = Number(document.getElementById('SwapColInputA').value);
-        var indexB = Number(document.getElementById('SwapColInputB').value);
+        var indexA = convertToNumber(document.getElementById('SwapColInputA').value);
+        var indexB = convertToNumber(document.getElementById('SwapColInputB').value);
         grid.swapPosition('col', grid.transInputIndex(indexA), grid.transInputIndex(indexB));
         document.getElementById('SwapColInputA').value = "";
         document.getElementById('SwapColInputB').value = "";
@@ -135,6 +144,19 @@
         grid.swapPosition('row', grid.transInputIndex(indexA), grid.transInputIndex(indexB));
         document.getElementById('SwapRowInputA').value = "";
         document.getElementById('SwapRowInputB').value = "";
+    }
+
+    function convertToNumber(index) {
+        var reg = /^\d+$/g;
+        if (reg.test(index)) {
+            index = Number(index);
+        } else {
+            reg = /^[A-Z]+$/g;
+            if (reg.test(index)) {
+                index = ToolsUtil.convert26DTo10D(index);
+            }
+        }
+        return index;
     }
 
     function moveCell(type) {
