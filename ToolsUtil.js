@@ -17,7 +17,7 @@ var ToolsUtil = {
     },
 
     deleteInstance: function (instance) {
-        instance.destory();
+        instance.destroy();
         var instanceKeys = Object.keys(instance);
         instanceKeys.forEach(function (item) {
             delete instance[item];

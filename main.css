@@ -201,7 +201,7 @@ button:hover {
     float: right;
 }
 
-.destory-btn button{
+.destroy-btn button{
     position: relative;
     float: right;
     margin-right: 15px;
@@ -209,6 +209,6 @@ button:hover {
     background-color: #e6e6e6;
 }
 
-.destory-btn button:hover {
+.destroy-btn button:hover {
     background-color: #808080;
 }

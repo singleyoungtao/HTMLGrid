@@ -1,6 +1,34 @@
-/**
- * API Function - Represents the constructor of Grid. <br>
- * Usage Example: var grid = new Grid(data, dom); <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Grid.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Grid.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * API Function - Represents the constructor of Grid. &lt;br>
+ * Usage Example: var grid = new Grid(data, dom); &lt;br>
  * @param {Two-dimensional-array} data - The data of the table content.
  * @param {Dom} dom - The container dom that customer passed to wrap the table.
  * @constructor
@@ -25,8 +53,8 @@ function Grid(data, dom) {
 
 Grid.prototype = {
     /**
-     * Private Function - To initialize the start state for grid instance. <br>
-     * Usage: It is called in Grid constructor. <br>
+     * Private Function - To initialize the start state for grid instance. &lt;br>
+     * Usage: It is called in Grid constructor. &lt;br>
      * @param {Two-dimensional-array} data - The data of the table content.
      * @param {Dom} container - The container dom that customer passed to wrap the table.
      */
@@ -42,22 +70,22 @@ Grid.prototype = {
     },
 
     /**
-     * Private Function - Call the render method of Render ( view ) for updating table. <br>
-     * Usage: It is called in Grid where needs to trigger the rerender. <br>
+     * Private Function - Call the render method of Render ( view ) for updating table. &lt;br>
+     * Usage: It is called in Grid where needs to trigger the rerender. &lt;br>
      */
     render: function () {
         Render.render(this.model.data, this.container, this.model.rowHeights, this.model.colWidths, this.model.cellBoxX, this.model.cellBoxY, this.isFirstRender);
     },
 
     /**
-     * Private Function - Generate the dom relevant operation functions. <br>
-     * Usage: It is called in Grid init function. <br>
+     * Private Function - Generate the dom relevant operation functions. &lt;br>
+     * Usage: It is called in Grid init function. &lt;br>
      */
     initBind: function () {
 
         /**
-         * Private Function - Change cursor shape when user hovers the cursor to the table thread or first column. <br>
-         * Usage: It is called in Grid init function. <br>
+         * Private Function - Change cursor shape when user hovers the cursor to the table thread or first column. &lt;br>
+         * Usage: It is called in Grid init function. &lt;br>
          * @param {event} e - Dom event.
          * @private
          */
@@ -69,7 +97,7 @@ Grid.prototype = {
             }
 
             if (eleIndex[0] === 0) {
-                if (e.offsetY < e.target.offsetHeight - this.model.cellPadding && e.offsetX > e.target.offsetWidth - this.model.cellPadding) {
+                if (e.offsetY &lt; e.target.offsetHeight - this.model.cellPadding &amp;&amp; e.offsetX > e.target.offsetWidth - this.model.cellPadding) {
                     this.wrapper.style.cursor = "col-resize";
                     this.resizable = true;
                     return;
@@ -78,7 +106,7 @@ Grid.prototype = {
                     this.resizable = false;
                 }
             } else if (eleIndex[1] === 0) {
-                if (e.offsetX < e.target.offsetWidth - this.model.cellPadding && e.offsetY > e.target.offsetHeight - this.model.cellPadding) {
+                if (e.offsetX &lt; e.target.offsetWidth - this.model.cellPadding &amp;&amp; e.offsetY > e.target.offsetHeight - this.model.cellPadding) {
                     this.wrapper.style.cursor = "row-resize";
                     this.resizable = true;
                     return;
@@ -168,11 +196,11 @@ Grid.prototype = {
             }
             this.table = this.container.querySelector('table');
 
-            if (eleIndex[0] === 0 && eleIndex[1] !== 0) {
-                if (e.offsetY < e.target.offsetHeight - this.model.cellPadding && e.offsetX < e.target.offsetWidth - this.model.cellPadding) {
+            if (eleIndex[0] === 0 &amp;&amp; eleIndex[1] !== 0) {
+                if (e.offsetY &lt; e.target.offsetHeight - this.model.cellPadding &amp;&amp; e.offsetX &lt; e.target.offsetWidth - this.model.cellPadding) {
                     this.isSwapping = true;
                     this.currentMoveEleStartIndexX = eleIndex[1] - 1;
-                    for (k = 1; k < this.table.rows.length; k++) {
+                    for (k = 1; k &lt; this.table.rows.length; k++) {
                         this.table.rows[k].cells[this.currentMoveEleStartIndexX + 1].style.backgroundColor = "#ebf7f3";
                     }
                     this.preSwapEle = e.target;
@@ -180,11 +208,11 @@ Grid.prototype = {
                     this.swapType = 'col';
                     return;
                 }
-            } else if (eleIndex[1] === 0 && eleIndex[0] !== 0) {
-                if (e.offsetX < e.target.offsetWidth - this.model.cellPadding && e.offsetY < e.target.offsetHeight - this.model.cellPadding) {
+            } else if (eleIndex[1] === 0 &amp;&amp; eleIndex[0] !== 0) {
+                if (e.offsetX &lt; e.target.offsetWidth - this.model.cellPadding &amp;&amp; e.offsetY &lt; e.target.offsetHeight - this.model.cellPadding) {
                     this.isSwapping = true;
                     this.currentMoveEleStartIndexY = eleIndex[0] - 1;
-                    for (k = 1; k < this.table.rows[0].cells.length; k++) {
+                    for (k = 1; k &lt; this.table.rows[0].cells.length; k++) {
                         this.table.rows[this.currentMoveEleStartIndexY + 1].cells[k].style.backgroundColor = "#ebf7f3";
                     }
                     this.preSwapEle = e.target;
@@ -226,36 +254,36 @@ Grid.prototype = {
                 var currentProcessEleIndex = ToolsUtil.getCellIndex(e.target);
                 var preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
                 var k;
-                if (! (currentProcessEleIndex && preSwapEleIndex)) {
+                if (! (currentProcessEleIndex &amp;&amp; preSwapEleIndex)) {
                     return;
                 }
                 if (this.swapType === 'col') {
-                    if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
+                    if (e.target !== this.preSwapEle &amp;&amp; e.target !== this.startSwapEle) {
                         if (currentProcessEleIndex[0] !== 0) {
                             this.render();
                             return;
                         }
-                        for (k = 1; k < this.table.rows.length; k++) {
+                        for (k = 1; k &lt; this.table.rows.length; k++) {
                             this.table.rows[k].cells[currentProcessEleIndex[1]].style.backgroundColor = "#ecf3ff";
                         }
                         if (this.preSwapEle !== this.startSwapEle) {
-                            for (k = 1; k < this.table.rows.length; k++) {
+                            for (k = 1; k &lt; this.table.rows.length; k++) {
                                 this.table.rows[k].cells[preSwapEleIndex[1]].style.backgroundColor = "white";
                             }
                         }
                         this.preSwapEle = e.target;
                     }
                 } else if (this.swapType === 'row') {
-                    if (e.target !== this.preSwapEle && e.target !== this.startSwapEle) {
+                    if (e.target !== this.preSwapEle &amp;&amp; e.target !== this.startSwapEle) {
                         if (currentProcessEleIndex[1] !== 0) {
                             this.render();
                             return;
                         }
-                        for (k = 1; k < this.table.rows[0].cells.length; k++) {
+                        for (k = 1; k &lt; this.table.rows[0].cells.length; k++) {
                             this.table.rows[currentProcessEleIndex[0]].cells[k].style.backgroundColor = "#ecf3ff";
                         }
                         if (this.preSwapEle !== this.startSwapEle) {
-                            for (k = 1; k < this.table.rows[0].cells.length; k++) {
+                            for (k = 1; k &lt; this.table.rows[0].cells.length; k++) {
                                 this.table.rows[preSwapEleIndex[0]].cells[k].style.backgroundColor = "white";
                             }
                         }
@@ -288,14 +316,14 @@ Grid.prototype = {
                             this.updateCellBox('left')
                         }
                     } else {
-                        if (this.model.cellBoxX + 1 < this.model.data[0].length) {
+                        if (this.model.cellBoxX + 1 &lt; this.model.data[0].length) {
                             this.updateCellBox('right')
                         }
                     }
                     break;
                 case 39:
                     // right
-                    if (this.model.cellBoxX + 1 <= this.model.data[0].length) {
+                    if (this.model.cellBoxX + 1 &lt;= this.model.data[0].length) {
                         if (e.preventDefault) {
                             e.preventDefault();
                         }
@@ -304,7 +332,7 @@ Grid.prototype = {
                     break;
                 case 40:
                     // down
-                    if (this.model.cellBoxY + 1 <= this.model.data.length) {
+                    if (this.model.cellBoxY + 1 &lt;= this.model.data.length) {
                         this.updateCellBox('down')
                     }
                     break;
@@ -319,10 +347,10 @@ Grid.prototype = {
                 return;
             }
 
-            if (eleIndex[0] > 0 && eleIndex[1] > 0) {
+            if (eleIndex[0] > 0 &amp;&amp; eleIndex[1] > 0) {
                 this.model.cellBoxX = eleIndex[1];
                 this.model.cellBoxY = eleIndex[0];
-                if (this.preCellBoxX === this.model.cellBoxX && this.preCellBoxY === this.model.cellBoxY) {
+                if (this.preCellBoxX === this.model.cellBoxX &amp;&amp; this.preCellBoxY === this.model.cellBoxY) {
                     return;
                 }
                 Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
@@ -339,7 +367,7 @@ Grid.prototype = {
 
         var _showContextMenu = function (e) {
             var eleIndex = ToolsUtil.getCellIndex(e.target);
-            if (!eleIndex || (eleIndex[0] !== 0 && eleIndex [1] !== 0) || (eleIndex[0] === 0 && eleIndex[1] === 0)) {
+            if (!eleIndex || (eleIndex[0] !== 0 &amp;&amp; eleIndex [1] !== 0) || (eleIndex[0] === 0 &amp;&amp; eleIndex[1] === 0)) {
                 return;
             }
             e.preventDefault();
@@ -414,8 +442,8 @@ Grid.prototype = {
     },
 
     /**
-     * Private Function - Bind the relevant table event functions after table generated. <br>
-     * Usage: It is called in Grid init function. <br>
+     * Private Function - Bind the relevant table event functions after table generated. &lt;br>
+     * Usage: It is called in Grid init function. &lt;br>
      */
     bindTableEvents: function () {
         // chagne cursor
@@ -436,8 +464,8 @@ Grid.prototype = {
     },
 
     /**
-     * Private Function - Remove the relevant table event functions before destroy the table. <br>
-     * Usage: It is called in Grid destroy method. <br>
+     * Private Function - Remove the relevant table event functions before destroy the table. &lt;br>
+     * Usage: It is called in Grid destroy method. &lt;br>
      */
     removeTableEvents: function () {
         this.wrapper.removeEventListener('mousemove', this.changeCursor);
@@ -456,7 +484,7 @@ Grid.prototype = {
     },
 
     /**
-     * API Function - Customer can call it to insert a row. <br>
+     * API Function - Customer can call it to insert a row. &lt;br>
      * Usage Example: gridInstance.insertRow(index);
      * @param index {number} - The number of row where you want to insert a now row.
      */
@@ -493,7 +521,7 @@ Grid.prototype = {
     },
 
     swapPosition: function (type, indexA, indexB) {
-        if (!ToolsUtil.isNumber(indexA) && !ToolsUtil.isNumber(indexB)) {
+        if (!ToolsUtil.isNumber(indexA) &amp;&amp; !ToolsUtil.isNumber(indexB)) {
             return;
         }
         this.model.swapPosition(type, indexA, indexB);
@@ -538,4 +566,26 @@ Grid.prototype = {
         this.model = null;
         Render.removeDOM(this.container);
     }
-};
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Grid.html">Grid</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Dec 18 2018 10:38:48 GMT+0800 (China Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
