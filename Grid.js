@@ -10,6 +10,7 @@ function Grid(data, dom) {
     this.resizable = false;
     this.isResizing = false;
     this.isSwapping = false;
+    this.isInputing = false;
     this.moveEle = null;
     this.currentMoveEleStartIndexX = null;
     this.currentMoveEleStartIndexY = null;
@@ -268,6 +269,12 @@ Grid.prototype = {
         };
 
         var _moveCellFocus = function (e) {
+            if (this.isInputing) {
+                if (e.keyCode === 9) {
+                    e.preventDefault();
+                }
+                return;
+            }
             switch (e.keyCode) {
                 case 37:
                     // left
@@ -305,6 +312,7 @@ Grid.prototype = {
         };
 
         var _focuseCell = function (e) {
+            this.isInputing = false;
             var eleIndex = ToolsUtil.getCellIndex(e.target.parentElement.parentElement);
             if (!eleIndex) {
                 return;
@@ -314,6 +322,8 @@ Grid.prototype = {
                 this.model.cellBoxX = eleIndex[1];
                 this.model.cellBoxY = eleIndex[0];
                 if (this.preCellBoxX === this.model.cellBoxX && this.preCellBoxY === this.model.cellBoxY) {
+                    this.isInputing = true;
+                    e.target.style.color = 'black';
                     return;
                 }
                 Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
