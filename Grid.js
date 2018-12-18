@@ -135,9 +135,11 @@ Grid.prototype = {
                 var deltX = e.pageX - this.mouseX;
                 var deltY = e.pageY - this.mouseY;
                 if (this.wrapper.style.cursor === "col-resize") {
-                    this.moveEle.style.minWidth = parseInt(this.moveEle.style.minWidth, 10) + deltX + 'px';
+                    var resizeWidth = Math.max(parseInt(this.moveEle.style.minWidth, 10) + deltX, this.model.defaultWidth);
+                    this.moveEle.style.minWidth = resizeWidth + 'px';
                 } else if (this.wrapper.style.cursor === "row-resize") {
-                    this.moveEle.style.height = parseInt(this.moveEle.style.height, 10) + deltY + 'px';
+                    var resizeHeight = Math.max(parseInt(this.moveEle.style.height, 10) + deltY, this.model.defaultHeight);
+                    this.moveEle.style.height = resizeHeight + 'px';
                 }
                 this.mouseX = e.pageX;
                 this.mouseY = e.pageY;
@@ -288,7 +290,7 @@ Grid.prototype = {
                             this.updateCellBox('left')
                         }
                     } else {
-                        if (this.model.cellBoxX + 1 < this.model.data[0].length) {
+                        if (this.model.cellBoxX + 1 <= this.model.data[0].length) {
                             this.updateCellBox('right')
                         }
                     }
@@ -296,9 +298,6 @@ Grid.prototype = {
                 case 39:
                     // right
                     if (this.model.cellBoxX + 1 <= this.model.data[0].length) {
-                        if (e.preventDefault) {
-                            e.preventDefault();
-                        }
                         this.updateCellBox('right')
                     }
                     break;
@@ -480,12 +479,18 @@ Grid.prototype = {
         if (!ToolsUtil.isNumber(index)) {
             return;
         }
+        if (!ToolsUtil.errorAlert('deleteRow', this.model.data)) {
+            return;
+        }
         this.model.deleteRow(index);
         this.render();
     },
 
     deleteCol: function (index) {
         if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
+        if (!ToolsUtil.errorAlert('deleteCol', this.model.data)) {
             return;
         }
         this.model.deleteCol(index);

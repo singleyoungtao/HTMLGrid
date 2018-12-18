@@ -1,6 +1,5 @@
 var Render = {
     render: function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY, isFirstRender) {
-
         var tableOuterHTML = '<table class="grid-table">';
         tableOuterHTML += this._generateThead(data, rowHeights, colWidths);
         tableOuterHTML += this._generateTbody(data, rowHeights);
