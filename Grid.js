@@ -459,7 +459,7 @@ Grid.prototype = {
     /**
      * API Function - Customer can call it to insert a row. <br>
      * Usage Example: gridInstance.insertRow(index);
-     * @param index {number} - The number of row where you want to insert a now row.
+     * @param {number} index - The index of row where you want to insert a now row.
      */
     insertRow: function (index) {
         if (!ToolsUtil.isNumber(index)) {
@@ -469,6 +469,10 @@ Grid.prototype = {
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to insert a column. <br>
+     * @param {number} index - The index of col where you want to insert a now col.
+     */
     insertCol: function (index) {
         if (!ToolsUtil.isNumber(index)) {
             return;
@@ -477,6 +481,11 @@ Grid.prototype = {
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to delete a row. <br>
+     * Usage Example: gridInstance.deleteRow(index);
+     * @param {number} index - The index of row where you want to delete a now row.
+     */
     deleteRow: function (index) {
         if (!ToolsUtil.isNumber(index)) {
             return;
@@ -488,6 +497,10 @@ Grid.prototype = {
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to delete a column. <br>
+     * @param {number} index - The index of col where you want to delete a now col.
+     */
     deleteCol: function (index) {
         if (!ToolsUtil.isNumber(index)) {
             return;
@@ -499,6 +512,12 @@ Grid.prototype = {
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to swap two row or col position.
+     * @param type
+     * @param indexA
+     * @param indexB
+     */
     swapPosition: function (type, indexA, indexB) {
         if (!ToolsUtil.isNumber(indexA) && !ToolsUtil.isNumber(indexB)) {
             return;
@@ -514,6 +533,10 @@ Grid.prototype = {
         return;
     },
 
+    /**
+     * API Function - Customer can call it to move the focused cell.
+     * @param type
+     */
     moveCell: function (type) {
         var e = {};
         switch (type) {
@@ -540,6 +563,9 @@ Grid.prototype = {
         this.preCellBoxY = this.model.cellBoxY;
     },
 
+    /**
+     * API Function - Customer can call it to destroy the instance of Grid.
+     */
     destroy: function () {
         this.removeTableEvents();
         this.model = null;

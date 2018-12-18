@@ -1,4 +1,14 @@
 var Render = {
+    /**
+     * Private Function - Accept the needed params and render the table.
+     * @param data
+     * @param container
+     * @param rowHeights
+     * @param colWidths
+     * @param cellBoxX
+     * @param cellBoxY
+     * @param isFirstRender
+     */
     render: function (data, container, rowHeights, colWidths, cellBoxX, cellBoxY, isFirstRender) {
         var tableOuterHTML = '<table class="grid-table">';
         tableOuterHTML += this._generateThead(data, rowHeights, colWidths);
@@ -14,6 +24,14 @@ var Render = {
         this._initCellBox(container, cellBoxY, cellBoxX);
     },
 
+    /**
+     * Private Function - Generate the table thead html string.
+     * @param data
+     * @param rowHeights
+     * @param colWidths
+     * @returns {string}
+     * @private
+     */
     _generateThead: function (data, rowHeights, colWidths) {
         var theadNum = data[0].length;
         var i;
@@ -26,6 +44,13 @@ var Render = {
         return theadHTMLString;
     },
 
+    /**
+     * Private Function - Generate the table content html string
+     * @param data
+     * @param rowHeights
+     * @returns {string}
+     * @private
+     */
     _generateTbody: function (data, rowHeights) {
         var trNum = data.length;
         var tdNum = data[0].length;
@@ -41,11 +66,23 @@ var Render = {
         return trHTMLString;
     },
 
+    /**
+     * Private
+     * @returns {string}
+     * @private
+     */
     _generateContextMenu: function () {
         return '<div class="context-menu"><ul><li data-type="insert-row" class="row">插入行</li><li data-type="insert-col" class="col">插入列</li>' +
             '<li data-type="delete-row" class="row">删除行</li><li data-type="delete-col" class="col">删除列</li></ul></div>';
     },
 
+    /**
+     * Private Function - Generate the focused cell box.
+     * @param container
+     * @param cellBoxY
+     * @param cellBoxX
+     * @private
+     */
     _initCellBox: function (container, cellBoxY, cellBoxX) {
         var table = container.querySelector('table');
         var firstTableCell;
@@ -55,6 +92,14 @@ var Render = {
         }
     },
 
+    /**
+     * Private Function - Re-render the focused cell box.
+     * @param wrapper
+     * @param cellIndexX
+     * @param cellIndexY
+     * @param precellX
+     * @param precellY
+     */
     moveFocusedCellBox: function (wrapper, cellIndexX, cellIndexY, precellX, precellY) {
         if (precellX === cellIndexX && precellY === cellIndexY) {
             return;
@@ -70,6 +115,10 @@ var Render = {
         }
     },
 
+    /**
+     * Private Function - Remove the dom of table container.
+     * @param container
+     */
     removeDOM: function (container) {
         container.innerHTML = '';
     }

@@ -1,3 +1,8 @@
+/**
+ * Private Function - Represent the constructor of grid model.
+ * @param {Two-dimensional-array} data - The data of the table content.
+ * @constructor
+ */
 function Model(data) {
     this.data = data;
     this.minWidth = 55;
@@ -21,6 +26,11 @@ function Model(data) {
 }
 
 Model.prototype = {
+    /**
+     * API Function - To get the model data.
+     * @returns {{data: *, defaultHeight: *, defaultWidth: *, cellPadding: *, cellBoxX: *, cellBoxY: *, preCellBoxX: *, preCellBoxY: *}}
+     * @private
+     */
     _getData: function () {
         return {
             data: this.data,
@@ -34,6 +44,10 @@ Model.prototype = {
         };
     },
 
+    /**
+     * Private Function - To insert a row in content data array.
+     * @param index
+     */
     insertRow: function (index) {
         if (index > this.data.length) {
             return;
@@ -43,6 +57,10 @@ Model.prototype = {
         this.rowHeights.splice(index + 1, 0, this.defaultHeight);
     },
 
+    /**
+     * Private Function - To insert a col in content data array.
+     * @param index
+     */
     insertCol: function (index) {
         if (index > this.data[0].length) {
             return;
@@ -55,6 +73,10 @@ Model.prototype = {
         this.colWidths.splice(index + 1, 0, this.defaultWidth);
     },
 
+    /**
+     * Private Function - To delete a row in content data array.
+     * @param index
+     */
     deleteRow: function (index) {
         if (index > this.data.length - 1) {
             return;
@@ -63,6 +85,10 @@ Model.prototype = {
         this.rowHeights.splice(index + 1, 1);
     },
 
+    /**
+     * Private Function - To delete a column in content data array.
+     * @param index
+     */
     deleteCol: function (index) {
         if (index > this.data[0].length - 1)
             var i;
@@ -72,6 +98,10 @@ Model.prototype = {
         this.colWidths.splice(index + 1, 1);
     },
 
+    /**
+     * Private Function - To swap position in content data array.
+     * @param index
+     */
     swapPosition: function (type, indexA, indexB) {
         var i, temp;
         switch (type) {
@@ -110,6 +140,10 @@ Model.prototype = {
         }
     },
 
+    /**
+     * Private Function - Record the width and height change to the size array.
+     * @param index
+     */
     resize: function (type, index, width) {
         switch (type) {
             case 'width':
@@ -123,10 +157,18 @@ Model.prototype = {
         }
     },
 
+    /**
+     * Private Function - Update the focused cell value.
+     * @param index
+     */
     updateCellData: function (indexX, indexY, value) {
         this.data[indexY][indexX] = value;
     },
 
+    /**
+     * Private Function - Update the focused cell position.
+     * @param index
+     */
     updateFocusedCellCoordinates: function (type) {
         switch (type) {
             case 'left':
