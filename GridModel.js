@@ -8,7 +8,7 @@ function Model(data) {
     this.cellBoxX = 1;
     this.cellBoxY = 1;
 
-    this.colWidths = ToolsUtil.initEmptyArr(this.data[0].length +1).map(function () {
+    this.colWidths = ToolsUtil.initEmptyArr(this.data[0].length + 1).map(function () {
         return 100;
     });
 
@@ -65,7 +65,7 @@ Model.prototype = {
 
     deleteCol: function (index) {
         if (index > this.data[0].length - 1)
-        var i;
+            var i;
         for (i = 0; i < this.data.length; i++) {
             this.data[i].splice(index, 1);
         }
@@ -122,7 +122,7 @@ Model.prototype = {
                 break;
         }
     },
-    
+
     updateCellData: function (indexX, indexY, value) {
         this.data[indexY][indexX] = value;
     },
@@ -131,12 +131,30 @@ Model.prototype = {
         switch (type) {
             case 'left':
                 this.cellBoxX -= 1;
+                if (this.cellBoxX === 0) {
+                    if (this.cellBoxY - 1 === 0) {
+                        this.cellBoxX = this.data[0].length;
+                        this.cellBoxY = this.data.length;
+                    } else {
+                        this.cellBoxX = this.data[0].length;
+                        this.cellBoxY -= 1;
+                    }
+                }
                 break;
             case 'up':
                 this.cellBoxY -= 1;
                 break;
             case 'right':
                 this.cellBoxX += 1;
+                if (this.cellBoxX > this.data[0].length) {
+                    if (this.cellBoxY + 1 > this.data.length) {
+                        this.cellBoxX = 1;
+                        this.cellBoxY = 1;
+                    } else {
+                        this.cellBoxX = 1;
+                        this.cellBoxY += 1;
+                    }
+                }
                 break;
             case 'down':
                 this.cellBoxY += 1;

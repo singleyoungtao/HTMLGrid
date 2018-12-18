@@ -31,7 +31,7 @@ var ToolsUtil = {
     contains: function (childEle, parentEle) {
         return parentEle.contains(childEle);
     },
-    
+
     errorAlert: function (type, data) {
         var isCorrect = true;
         switch (type) {
@@ -49,4 +49,17 @@ var ToolsUtil = {
         }
         return isCorrect;
     },
+
+    convert10DTo26D: function (num) {
+        var code = '';
+        var temp;
+        for (num; num>0; num=(num-temp)/26) {
+            temp = num%26;
+            if (temp === 0) {
+                temp = 26;
+            }
+            code = String.fromCharCode(64 + parseInt(temp)) + code;
+        }
+        return code;
+    }
 };

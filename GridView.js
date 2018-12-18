@@ -20,7 +20,7 @@ var Render = {
         var theadHTMLString = '<thead class="grid-thead"><tr><th data-index="0-0" style="height: ' + rowHeights[0] +
             'px; min-width: ' + colWidths[0] + 'px"></th>';
         for (i = 0; i < theadNum; i++) {
-            theadHTMLString += '<th data-index="0-' + (i + 1) + '"  style="min-width: ' + colWidths[i + 1] + 'px;">' + (i+1) + '</th>';
+            theadHTMLString += '<th data-index="0-' + (i + 1) + '"  style="min-width: ' + colWidths[i + 1] + 'px;">' + ToolsUtil.convert10DTo26D(i + 1) + '</th>';
         }
         theadHTMLString += '</tr></thead>';
         return theadHTMLString;
@@ -32,7 +32,7 @@ var Render = {
         var i, j;
         var trHTMLString = "";
         for (i = 0; i < trNum; i++) {
-            trHTMLString += '<tr><td data-index="' + (i + 1) + '-0" class="table-col" style=" height:' + rowHeights[i + 1] + 'px;">' + (i+1);
+            trHTMLString += '<tr><td data-index="' + (i + 1) + '-0" class="table-col" style=" height:' + rowHeights[i + 1] + 'px;">' + (i + 1);
             for (j = 0; j < tdNum; j++) {
                 trHTMLString += '<td data-index="' + (i + 1) + '-' + (j + 1) + '"><div><input value="' + data[i][j] + '"></div></td>';
             }
@@ -48,19 +48,28 @@ var Render = {
 
     _initCellBox: function (container, cellBoxY, cellBoxX) {
         var table = container.querySelector('table');
-        var firstTableCell = table.rows[cellBoxY].cells[cellBoxX];
-        firstTableCell.style.border = '3px solid #4CAF50';
+        var firstTableCell;
+        if (table.rows[cellBoxY] && table.rows[cellBoxY].cells[cellBoxX]) {
+            firstTableCell = table.rows[cellBoxY].cells[cellBoxX];
+            firstTableCell.style.border = '3px solid #4CAF50';
+        }
     },
 
     moveFocusedCellBox: function (wrapper, cellIndexX, cellIndexY, precellX, precellY) {
+        if (precellX === cellIndexX && precellY === cellIndexY) {
+            return;
+        }
         var table = wrapper.querySelector('table');
         var focusedTableCell = table.rows[cellIndexY].cells[cellIndexX];
         focusedTableCell.style.border = '3px solid #4CAF50';
         focusedTableCell.querySelector('input').focus();
-        var preFocusedTableCell = table.rows[precellY].cells[precellX];
-        preFocusedTableCell.removeAttribute('style');
+        var preFocusedTableCell;
+        if (table.rows[precellY] && table.rows[precellY].cells[precellX]) {
+            preFocusedTableCell = table.rows[precellY].cells[precellX];
+            preFocusedTableCell.removeAttribute('style');
+        }
     },
-    
+
     removeDOM: function (container) {
         container.innerHTML = '';
     }

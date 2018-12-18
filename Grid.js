@@ -211,7 +211,7 @@ Grid.prototype = {
                 } else if (this.swapType === 'row') {
                     currentMoveEleEndIndex = ToolsUtil.getCellIndex(e.target);
                     if (currentMoveEleEndIndex) {
-                        this.currentMoveEleEndIndexY =currentMoveEleEndIndex[0] - 1;
+                        this.currentMoveEleEndIndexY = currentMoveEleEndIndex[0] - 1;
                     } else {
                         return;
                     }
@@ -228,7 +228,7 @@ Grid.prototype = {
                 var currentProcessEleIndex = ToolsUtil.getCellIndex(e.target);
                 var preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
                 var k;
-                if (! (currentProcessEleIndex && preSwapEleIndex)) {
+                if (!(currentProcessEleIndex && preSwapEleIndex)) {
                     return;
                 }
                 if (this.swapType === 'col') {
@@ -271,14 +271,12 @@ Grid.prototype = {
             switch (e.keyCode) {
                 case 37:
                     // left
-                    if (this.model.cellBoxX - 1 > 0) {
-                        this.updateCellBox('left')
-                    }
+                    this.updateCellBox('left');
                     break;
                 case 38:
                     // up
                     if (this.model.cellBoxY - 1 > 0) {
-                        this.updateCellBox('up')
+                        this.updateCellBox('up');
                     }
                     break;
                 case 9:
@@ -286,20 +284,14 @@ Grid.prototype = {
                         e.preventDefault();
                     }
                     if (e.shiftKey) {
-                        if (this.model.cellBoxX - 1 > 0) {
-                            this.updateCellBox('left')
-                        }
+                        this.updateCellBox('left')
                     } else {
-                        if (this.model.cellBoxX + 1 <= this.model.data[0].length) {
-                            this.updateCellBox('right')
-                        }
+                        this.updateCellBox('right')
                     }
                     break;
                 case 39:
                     // right
-                    if (this.model.cellBoxX + 1 <= this.model.data[0].length) {
-                        this.updateCellBox('right')
-                    }
+                    this.updateCellBox('right');
                     break;
                 case 40:
                     // down
@@ -507,7 +499,7 @@ Grid.prototype = {
 
     transInputIndex: function (index) {
         if (ToolsUtil.isNumber(index)) {
-            return index > 0 ? index -1 : index;
+            return index > 0 ? index - 1 : index;
         }
         return;
     },
