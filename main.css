@@ -50,7 +50,9 @@
 
 .grid-table {
     border-collapse: collapse;
-    /*table-layout: fixed;*/
+    margin-bottom: 500px;
+    margin-right: 800px;
+    display: inline-block;
 }
 
 .grid-table th {
