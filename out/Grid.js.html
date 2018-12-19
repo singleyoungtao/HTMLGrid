@@ -38,6 +38,7 @@ function Grid(data, dom) {
     this.resizable = false;
     this.isResizing = false;
     this.isSwapping = false;
+    this.isInputing = false;
     this.moveEle = null;
     this.currentMoveEleStartIndexX = null;
     this.currentMoveEleStartIndexY = null;
@@ -163,9 +164,11 @@ Grid.prototype = {
                 var deltX = e.pageX - this.mouseX;
                 var deltY = e.pageY - this.mouseY;
                 if (this.wrapper.style.cursor === "col-resize") {
-                    this.moveEle.style.minWidth = parseInt(this.moveEle.style.minWidth, 10) + deltX + 'px';
+                    var resizeWidth = Math.max(parseInt(this.moveEle.style.minWidth, 10) + deltX, this.model.defaultWidth);
+                    this.moveEle.style.minWidth = resizeWidth + 'px';
                 } else if (this.wrapper.style.cursor === "row-resize") {
-                    this.moveEle.style.height = parseInt(this.moveEle.style.height, 10) + deltY + 'px';
+                    var resizeHeight = Math.max(parseInt(this.moveEle.style.height, 10) + deltY, this.model.defaultHeight);
+                    this.moveEle.style.height = resizeHeight + 'px';
                 }
                 this.mouseX = e.pageX;
                 this.mouseY = e.pageY;
@@ -237,7 +240,7 @@ Grid.prototype = {
                 } else if (this.swapType === 'row') {
                     currentMoveEleEndIndex = ToolsUtil.getCellIndex(e.target);
                     if (currentMoveEleEndIndex) {
-                        this.currentMoveEleEndIndexY =currentMoveEleEndIndex[0] - 1;
+                        this.currentMoveEleEndIndexY = currentMoveEleEndIndex[0] - 1;
                     } else {
                         return;
                     }
@@ -254,7 +257,7 @@ Grid.prototype = {
                 var currentProcessEleIndex = ToolsUtil.getCellIndex(e.target);
                 var preSwapEleIndex = ToolsUtil.getCellIndex(this.preSwapEle);
                 var k;
-                if (! (currentProcessEleIndex &amp;&amp; preSwapEleIndex)) {
+                if (!(currentProcessEleIndex &amp;&amp; preSwapEleIndex)) {
                     return;
                 }
                 if (this.swapType === 'col') {
@@ -294,17 +297,21 @@ Grid.prototype = {
         };
 
         var _moveCellFocus = function (e) {
+            if (this.isInputing) {
+                if (e.keyCode === 9) {
+                    e.preventDefault();
+                }
+                return;
+            }
             switch (e.keyCode) {
                 case 37:
                     // left
-                    if (this.model.cellBoxX - 1 > 0) {
-                        this.updateCellBox('left')
-                    }
+                    this.updateCellBox('left');
                     break;
                 case 38:
                     // up
                     if (this.model.cellBoxY - 1 > 0) {
-                        this.updateCellBox('up')
+                        this.updateCellBox('up');
                     }
                     break;
                 case 9:
@@ -312,23 +319,14 @@ Grid.prototype = {
                         e.preventDefault();
                     }
                     if (e.shiftKey) {
-                        if (this.model.cellBoxX - 1 > 0) {
-                            this.updateCellBox('left')
-                        }
+                        this.updateCellBox('left')
                     } else {
-                        if (this.model.cellBoxX + 1 &lt; this.model.data[0].length) {
-                            this.updateCellBox('right')
-                        }
+                        this.updateCellBox('right')
                     }
                     break;
                 case 39:
                     // right
-                    if (this.model.cellBoxX + 1 &lt;= this.model.data[0].length) {
-                        if (e.preventDefault) {
-                            e.preventDefault();
-                        }
-                        this.updateCellBox('right')
-                    }
+                    this.updateCellBox('right');
                     break;
                 case 40:
                     // down
@@ -342,6 +340,7 @@ Grid.prototype = {
         };
 
         var _focuseCell = function (e) {
+            this.isInputing = false;
             var eleIndex = ToolsUtil.getCellIndex(e.target.parentElement.parentElement);
             if (!eleIndex) {
                 return;
@@ -351,6 +350,8 @@ Grid.prototype = {
                 this.model.cellBoxX = eleIndex[1];
                 this.model.cellBoxY = eleIndex[0];
                 if (this.preCellBoxX === this.model.cellBoxX &amp;&amp; this.preCellBoxY === this.model.cellBoxY) {
+                    this.isInputing = true;
+                    e.target.style.color = 'black';
                     return;
                 }
                 Render.moveFocusedCellBox(this.wrapper, this.model.cellBoxX, this.model.cellBoxY, this.preCellBoxX, this.preCellBoxY);
@@ -486,7 +487,7 @@ Grid.prototype = {
     /**
      * API Function - Customer can call it to insert a row. &lt;br>
      * Usage Example: gridInstance.insertRow(index);
-     * @param index {number} - The number of row where you want to insert a now row.
+     * @param {number} index - The index of row where you want to insert a now row.
      */
     insertRow: function (index) {
         if (!ToolsUtil.isNumber(index)) {
@@ -496,6 +497,10 @@ Grid.prototype = {
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to insert a column. &lt;br>
+     * @param {number} index - The index of col where you want to insert a now col.
+     */
     insertCol: function (index) {
         if (!ToolsUtil.isNumber(index)) {
             return;
@@ -504,22 +509,43 @@ Grid.prototype = {
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to delete a row. &lt;br>
+     * Usage Example: gridInstance.deleteRow(index);
+     * @param {number} index - The index of row where you want to delete a now row.
+     */
     deleteRow: function (index) {
         if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
+        if (!ToolsUtil.errorAlert('deleteRow', this.model.data)) {
             return;
         }
         this.model.deleteRow(index);
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to delete a column. &lt;br>
+     * @param {number} index - The index of col where you want to delete a now col.
+     */
     deleteCol: function (index) {
         if (!ToolsUtil.isNumber(index)) {
+            return;
+        }
+        if (!ToolsUtil.errorAlert('deleteCol', this.model.data)) {
             return;
         }
         this.model.deleteCol(index);
         this.render();
     },
 
+    /**
+     * API Function - Customer can call it to swap two row or col position.
+     * @param type
+     * @param indexA
+     * @param indexB
+     */
     swapPosition: function (type, indexA, indexB) {
         if (!ToolsUtil.isNumber(indexA) &amp;&amp; !ToolsUtil.isNumber(indexB)) {
             return;
@@ -530,11 +556,15 @@ Grid.prototype = {
 
     transInputIndex: function (index) {
         if (ToolsUtil.isNumber(index)) {
-            return index > 0 ? index -1 : index;
+            return index > 0 ? index - 1 : index;
         }
         return;
     },
 
+    /**
+     * API Function - Customer can call it to move the focused cell.
+     * @param type
+     */
     moveCell: function (type) {
         var e = {};
         switch (type) {
@@ -561,6 +591,9 @@ Grid.prototype = {
         this.preCellBoxY = this.model.cellBoxY;
     },
 
+    /**
+     * API Function - Customer can call it to destroy the instance of Grid.
+     */
     destroy: function () {
         this.removeTableEvents();
         this.model = null;
@@ -582,7 +615,7 @@ Grid.prototype = {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Dec 18 2018 10:38:48 GMT+0800 (China Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 19 2018 09:01:10 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
